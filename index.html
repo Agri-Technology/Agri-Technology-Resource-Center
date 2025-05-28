@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Agri-Technology Resource Center</title>
+  <script src="https://cdn.tailwindcss.com "></script>
+  <link rel="icon" href="images/home.theme-light.png" type="image/x-icon">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+  <!-- Header -->
+  <header class="bg-green-700 text-white shadow-lg sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold">Agri-Technology Resource Center</h1>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex space-x-6">
+        <a href="#home" class="capitalize hover:text-green-200 transition-colors">Home</a>
+        <a href="#resources" class="capitalize hover:text-green-200 transition-colors">Resources</a>
+        <a href="#news" class="capitalize hover:text-green-200 transition-colors">News</a>
+        <a href="#about" class="capitalize hover:text-green-200 transition-colors">About</a>
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <button id="menuButton" class="md:hidden focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden md:hidden bg-green-800 p-4 space-y-3">
+      <a href="#home" class="block w-full text-left capitalize py-2 hover:text-green-200 transition-colors">Home</a>
+      <a href="#resources" class="block w-full text-left capitalize py-2 hover:text-green-200 transition-colors">Resources</a>
+      <a href="#news" class="block w-full text-left capitalize py-2 hover:text-green-200 transition-colors">News</a>
+      <a href="#about" class="block w-full text-left capitalize py-2 hover:text-green-200 transition-colors">About</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="relative bg-gradient-to-r from-green-600 to-teal-500 text-white py-20">
+    <div class="absolute inset-0 bg-black opacity-20"></div>
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="max-w-2xl">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">Empowering Agriculture Through Innovation</h2>
+        <p class="text-lg md:text-xl mb-6">Your one-stop hub for agri-tech research, tools, and solutions to transform modern farming practices.</p>
+        <a href="#resources" class="bg-white text-green-700 px-6 py-3 rounded-full font-semibold hover:bg-green-50 transition-colors shadow-md transform hover:scale-105 duration-300 inline-block">Explore Resources</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resources Section -->
+  <section id="resources" class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-8 text-center text-green-700">Agri-Tech Resources</h2>
+      
+      <div class="flex flex-wrap justify-center gap-2 mb-8">
+        <button class="px-4 py-2 bg-green-100 text-green-800 rounded-full hover:bg-green-200 transition-colors">All</button>
+        <button class="px-4 py-2 bg-green-100 text-green-800 rounded-full hover:bg-green-200 transition-colors">IoT</button>
+        <button class="px-4 py-2 bg-green-100 text-green-800 rounded-full hover:bg-green-200 transition-colors">AI</button>
+        <button class="px-4 py-2 bg-green-100 text-green-800 rounded-full hover:bg-green-200 transition-colors">Robotics</button>
+        <button class="px-4 py-2 bg-green-100 text-green-800 rounded-full hover:bg-green-200 transition-colors">Drones</button>
+        <button class="px-4 py-2 bg-green-100 text-green-800 rounded-full hover:bg-green-200 transition-colors">Blockchain</button>
+        <button class="px-4 py-2 bg-green-100 text-green-800 rounded-full hover:bg-green-200 transition-colors">Climate Tech</button>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white border border-green-200 rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow">
+          <span class="text-xs font-semibold text-green-600 uppercase">Sensors</span>
+          <h3 class="mt-2 text-lg font-semibold text-gray-800">Soil Sensor Data Guide</h3>
+          <a href="pages/sensor-data-guide.html" class="mt-4 inline-block text-green-600 hover:underline">View Resource</a>
+        </div>
+        <div class="bg-white border border-green-200 rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow">
+          <span class="text-xs font-semibold text-green-600 uppercase">Imaging</span>
+          <h3 class="mt-2 text-lg font-semibold text-gray-800">Satellite Imaging for Crop Analysis</h3>
+          <a href="pages/satellite-imaging-for-crop-analysis.html" class="mt-4 inline-block text-green-600 hover:underline">View Resource</a>
+        </div>
+        <div class="bg-white border border-green-200 rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow">
+          <span class="text-xs font-semibold text-green-600 uppercase">Research</span>
+          <h3 class="mt-2 text-lg font-semibold text-gray-800">AgriTech Research Papers Repository</h3>
+          <a href="pages/agritech-research-papers-repository.html" class="mt-4 inline-block text-green-600 hover:underline">View Resource</a>
+        </div>
+        <div class="bg-white border border-green-200 rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow">
+          <span class="text-xs font-semibold text-green-600 uppercase">Tools</span>
+          <h3 class="mt-2 text-lg font-semibold text-gray-800">Mobile Apps for Farmers</h3>
+          <a href="pages/mobile-apps-for-farmers.html" class="mt-4 inline-block text-green-600 hover:underline">View Resource</a>
+        </div>
+        <div class="bg-white border border-green-200 rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow">
+          <span class="text-xs font-semibold text-green-600 uppercase">Software</span>
+          <h3 class="mt-2 text-lg font-semibold text-gray-800">Farm Management Software Comparison</h3>
+          <a href="pages/farm-management-software-comparison.html" class="mt-4 inline-block text-green-600 hover:underline">View Resource</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- News & Articles Section -->
+  <section id="news" class="py-16 bg-gray-100">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-12 text-center text-green-700">Latest Agri-Tech News</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow">
+          <img src="https://placehold.co/600x400/2f855a/ffffff?text=Smart+Irrigation " alt="Smart Irrigation Systems in Modern Farming" class="w-full h-48 object-cover" />
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">Smart Irrigation Systems in Modern Farming</h3>
+            <p class="text-gray-600 mb-4">Explore how IoT-based irrigation systems are revolutionizing water management in agriculture.</p>
+            <a href="pages/smart-irrigation-systems-in-modern-farming.html" class="text-green-600 hover:text-green-800 font-medium flex items-center">
+              Read More
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow">
+          <img src="https://placehold.co/600x400/4fd1c5/ffffff?text=Drones+in+Farming " alt="Drones in Precision Agriculture" class="w-full h-48 object-cover" />
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">Drones in Precision Agriculture</h3>
+            <p class="text-gray-600 mb-4">Discover the impact of drone technology on crop monitoring and yield optimization.</p>
+            <a href="pages/drones-in-precision-agriculture.html" class="text-green-600 hover:text-green-800 font-medium flex items-center">
+              Read More
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow">
+          <img src="https://placehold.co/600x400/ed8936/ffffff?text=AI+Pest+Detection " alt="AI-Powered Pest Detection Tools" class="w-full h-48 object-cover" />
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">AI-Powered Pest Detection Tools</h3>
+            <p class="text-gray-600 mb-4">Learn how artificial intelligence is helping farmers identify and manage pests efficiently.</p>
+            <a href="pages/AI-Powered-pest-detection-tools.html" class="text-green-600 hover:text-green-800 font-medium flex items-center">
+              Read More
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-8 text-center text-green-700">About the Agri-Technology Resource Center</h2>
+      
+      <div class="max-w-3xl mx-auto">
+        <p class="text-lg text-gray-700 mb-6">
+          The Agri-Technology Resource Center is a comprehensive digital platform designed to connect farmers, researchers, and agricultural professionals with the latest innovations in agri-tech.
+        </p>
+        
+        <p class="text-lg text-gray-700 mb-6">
+          Our mission is to bridge the gap between cutting-edge technological advancements and practical implementation in the field of agriculture. We provide curated information, tools, and research to help improve productivity, sustainability, and profitability across the agricultural sector.
+        </p>
+        
+        <p class="text-lg text-gray-700">
+          Whether you're looking for precision farming tools, climate-resilient technologies, or data-driven decision-making platforms, our center offers valuable insights and resources to support innovation in modern agriculture.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-green-800 text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <h3 class="text-xl font-bold mb-4">Agri-Technology Resource Center</h3>
+          <p class="text-green-200">Connecting farmers and researchers with the future of agriculture through innovative technology and knowledge sharing.</p>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+          <ul class="space-y-2">
+            <li><a href="#home" class="text-green-200 hover:text-white transition-colors block">Home</a></li>
+            <li><a href="#resources" class="text-green-200 hover:text-white transition-colors block">Resources</a></li>
+            <li><a href="#news" class="text-green-200 hover:text-white transition-colors block">News & Articles</a></li>
+            <li><a href="#about" class="text-green-200 hover:text-white transition-colors block">About Us</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-4">Contact Information</h3>
+          <address class="not-italic text-green-200">
+            <p>Email: agritechnologyresourcecenter@gmail.com</p>
+            <p>Phone: +256 (706) 691-486</p>
+          </address>
+        </div>
+      </div>
+      <div class="border-t border-green-700 mt-8 pt-6 text-center text-green-300">
+        <p>&copy; 2025 Agri-Technology Resource Center. All rights reserved.</p>
+        <p><a href="pages/privacy-policy-terms-of-service.html" class="text-green-200 hover:text-white transition-colors block" >Terms Of Service | Privacy Policy </a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript for Mobile Menu Toggle -->
+  <script>
+    const menuButton = document.getElementById('menuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    menuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
+
+</body>
+</html>

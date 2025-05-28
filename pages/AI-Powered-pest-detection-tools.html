@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI-Powered Pest Detection Tools</title>
+  <script src="https://cdn.tailwindcss.com "></script>
+  <style>
+    .transition-max-h {
+      transition: max-height 0.3s ease-out;
+      overflow: hidden;
+      max-height: 0;
+    }
+
+    .transition-max-h.expanded {
+      max-height: 500px;
+      overflow: visible;
+    }
+
+    .rotate-icon {
+      transform: rotate(0deg);
+      transition: transform 0.3s ease;
+    }
+
+    .rotate-icon.open {
+      transform: rotate(180deg);
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- Header -->
+  <header class="bg-green-700 text-white shadow-lg sticky top-0 z-10">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold">Agri-Technology Resource Center</h1>
+      <a href="../index.html" class="hover:underline">Home</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-green-600 to-teal-500 text-white py-16">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">AI-Powered Pest Detection Tools</h2>
+      <p class="text-lg md:text-xl max-w-3xl mx-auto">
+        Learn how artificial intelligence is helping farmers identify and manage pests efficiently through smart imaging and real-time analytics.
+      </p>
+    </div>
+  </section>
+
+  <!-- Search & Filter Bar -->
+  <section class="py-6 bg-white shadow-sm">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
+        <input 
+          type="text" 
+          placeholder="Search by tool name or feature..." 
+          id="searchInput"
+          class="w-full md:w-1/2 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400"
+        />
+        <select id="categoryFilter" class="w-full md:w-auto p-3 border border-gray-300 rounded-md bg-white text-gray-700">
+          <option value="">All Categories</option>
+          <option value="Image Recognition">Image Recognition</option>
+          <option value="Mobile Apps">Mobile Apps</option>
+          <option value="Drone Integration">Drone Integration</option>
+          <option value="IoT Sensors">IoT Sensors</option>
+          <option value="Cloud Platforms">Cloud Platforms</option>
+        </select>
+        <button onclick="filterTools()" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-md transition-colors">
+          Search
+        </button>
+      </div>
+
+      <!-- Search Suggestions -->
+      <div id="searchResults" class="mt-2 bg-white border border-gray-300 rounded-md shadow-md hidden max-h-64 overflow-y-auto z-20 w-full md:w-1/2">
+        <!-- Results will be injected here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container mx-auto px-6 py-12 space-y-16">
+
+    <!-- Introduction -->
+    <section>
+      <h3 class="text-2xl font-semibold text-green-700 mb-6">Introduction to AI Pest Detection</h3>
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <p class="mb-4">
+          Artificial Intelligence (AI) is transforming pest detection in agriculture by enabling early identification and precise treatment of infestations before they cause widespread damage.
+        </p>
+        <p>
+          These systems use computer vision, machine learning models, and data from drones, sensors, or smartphone cameras to detect signs of pests and diseases in crops with high accuracy. Farmers can then apply targeted interventions, reducing chemical usage and improving yields.
+        </p>
+      </div>
+    </section>
+
+    <!-- AI Pest Detection Tools -->
+    <section>
+      <h3 class="text-2xl font-semibold text-green-700 mb-6">Featured AI-Based Pest Detection Tools</h3>
+      <div id="toolGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Tool Cards go here via JS -->
+      </div>
+    </section>
+
+    <!-- Browse by Category -->
+    <section>
+      <h3 class="text-2xl font-semibold text-green-700 mb-6">Browse by Technology Type</h3>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div onclick="applyCategory('Image Recognition')" class="bg-green-100 text-green-800 p-4 rounded-lg text-center cursor-pointer hover:bg-green-200 transition-colors">
+          Image Recognition
+        </div>
+        <div onclick="applyCategory('Mobile Apps')" class="bg-green-100 text-green-800 p-4 rounded-lg text-center cursor-pointer hover:bg-green-200 transition-colors">
+          Mobile Apps
+        </div>
+        <div onclick="applyCategory('Drone Integration')" class="bg-green-100 text-green-800 p-4 rounded-lg text-center cursor-pointer hover:bg-green-200 transition-colors">
+          Drone Integration
+        </div>
+        <div onclick="applyCategory('IoT Sensors')" class="bg-green-100 text-green-800 p-4 rounded-lg text-center cursor-pointer hover:bg-green-200 transition-colors">
+          IoT Sensors
+        </div>
+        <div onclick="applyCategory('Cloud Platforms')" class="bg-green-100 text-green-800 p-4 rounded-lg text-center cursor-pointer hover:bg-green-200 transition-colors">
+          Cloud Platforms
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits -->
+    <section>
+      <h3 class="text-2xl font-semibold text-green-700 mb-6">Benefits of AI Pest Detection</h3>
+      <ul class="space-y-4 list-disc pl-5">
+        <li><strong>Early Infestation Detection:</strong> Identifies pest activity before visible symptoms appear.</li>
+        <li><strong>Reduces Chemical Use:</strong> Enables spot-treatment rather than blanket pesticide application.</li>
+        <li><strong>Scalability:</strong> Works across smallholder farms and large agribusinesses alike.</li>
+        <li><strong>Cost Efficiency:</strong> Lowers input costs and labor-intensive scouting efforts.</li>
+        <li><strong>High Accuracy:</strong> Deep learning models achieve over 90% accuracy in field tests.</li>
+        <li><strong>Data-Driven Insights:</strong> Provides historical pest trends and predictive analytics.</li>
+      </ul>
+    </section>
+
+    <!-- Real-World Applications -->
+    <section>
+      <h3 class="text-2xl font-semibold text-green-700 mb-6">Real-World Applications</h3>
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <p class="mb-4">
+          AI-powered pest detection is being adopted globally:
+        </p>
+        <ul class="list-disc pl-5 space-y-2">
+          <li><strong>Kenya:</strong> PlantVillage app helps smallholder farmers detect cassava brown streak disease via smartphone camera.</li>
+          <li><strong>India:</strong> Startups like <em>Cropin</em> and <em>Intello Labs</em> offer AI-based crop health diagnostics for cotton, rice, and wheat fields.</li>
+          <li><strong>Brazil:</strong> Sugarcane plantations use drone-captured imagery with AI to detect mealybug infestations.</li>
+          <li><strong>USA:</strong> Wineries in California use AI image analysis for early mildew and beetle detection.</li>
+          <li><strong>Australia:</strong> AgriWebb combines livestock pest monitoring with pasture insect tracking using thermal imaging and AI.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Popular AI Tools -->
+    <section>
+      <h3 class="text-2xl font-semibold text-green-700 mb-6">Popular AI Pest Detection Tools</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h4 class="font-bold text-lg mb-2">Plantix</h4>
+          <p>Plantix uses AI image recognition to diagnose plant diseases and pests from photos taken on smartphones. Available in multiple languages, ideal for smallholder farmers.</p>
+          <a href="https://www.skylarksoftwares.com/plantix " target="_blank" class="inline-block mt-3 text-green-600 hover:text-green-800 font-medium">Visit Website →</a>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h4 class="font-bold text-lg mb-2">CropX AI</h4>
+          <p>CropX offers soil sensors combined with AI analytics to predict pest outbreaks based on environmental conditions like moisture and temperature.</p>
+          <a href="https://cropx.com " target="_blank" class="inline-block mt-3 text-green-600 hover:text-green-800 font-medium">Visit Website →</a>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h4 class="font-bold text-lg mb-2">AgNext</h4>
+          <p>AgNext uses AI to detect pests and quality issues in grains and pulses using mobile apps and image scanning technology. Used in India and Southeast Asia.</p>
+          <a href="https://agnext.in " target="_blank" class="inline-block mt-3 text-green-600 hover:text-green-800 font-medium">Visit Website →</a>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h4 class="font-bold text-lg mb-2">Arable Mark</h4>
+          <p>The Arable Mark device combines weather sensing, multispectral imaging, and AI analytics to detect pest pressure and recommend treatments automatically.</p>
+          <a href="https://www.arable.com " target="_blank" class="inline-block mt-3 text-green-600 hover:text-green-800 font-medium">Visit Website →</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-green-800 text-white py-12 mt-16">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <h3 class="text-xl font-bold mb-4">Agri-Technology Resource Center</h3>
+          <p class="text-green-200">Connecting farmers and researchers with the future of agriculture through innovative technology and knowledge sharing.</p>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+          <ul class="space-y-2">
+            <li><a href="../index.html" class="text-green-200 hover:text-white transition-colors block">Home</a></li>
+            <li><a href="../index.html#resources" class="text-green-200 hover:text-white transition-colors block">Resources</a></li>
+            <li><a href="../index.html#news" class="text-green-200 hover:text-white transition-colors block">News</a></li>
+            <li><a href="../index.html#about" class="text-green-200 hover:text-white transition-colors block">About Us</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-4">Contact Information</h3>
+          <address class="not-italic text-green-200">
+            <p>Email: agritechnologyresourcecenter@gmail.com</p>
+            <p>Phone: +256 (706) 691-486</p>
+          </address>
+        </div>
+      </div>
+      <div class="border-t border-green-700 mt-8 pt-6 text-center text-green-300">
+        <p>&copy; 2025 Agri-Technology Resource Center. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript Logic -->
+  <script>
+    const tools = [
+      {
+        name: "Plantix",
+        description: "AI-powered plant disease and pest detection tool for smartphones.",
+        category: "Mobile Apps",
+        website: "https://www.skylarksoftwares.com/plantix ",
+        details: `
+          <p>Plantix uses machine learning to identify plant diseases and pests from uploaded images. Farmers simply take a photo of a diseased plant, and the app analyzes it to suggest possible causes and remedies.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>AI-based plant disease recognition</li>
+            <li>Fertilizer and nutrient deficiency analysis</li>
+            <li>Offline functionality</li>
+            <li>Support for multiple languages</li>
+            <li>Integrated chat support with agronomists</li>
+          </ul>
+          <p><strong>Available on:</strong> Android</p>
+          <p><strong>Cost:</strong> Free with ads</p>
+          <div class="mt-4">
+            <a href="https://www.skylarksoftwares.com/plantix " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Visit Official Site →</a>
+          </div>
+        `
+      },
+      {
+        name: "Crop Doctor",
+        description: "AI-based crop diagnosis tool developed by IRRI for rice farmers in Asia and Africa.",
+        category: "Image Recognition",
+        website: "https://www.cropdoctor.irri.org ",
+        details: `
+          <p>Crop Doctor allows farmers to diagnose common rice diseases and pests by uploading images of affected crops. The app compares the image against a vast database of known issues and recommends appropriate solutions.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Image-based crop diagnosis</li>
+            <li>Rice-specific pest and disease guide</li>
+            <li>Step-by-step treatment instructions</li>
+            <li>Available offline</li>
+            <li>Multi-language support</li>
+          </ul>
+          <p><strong>Available on:</strong> Android</p>
+          <p><strong>Cost:</strong> Free</p>
+          <div class="mt-4">
+            <a href="https://www.cropdoctor.irri.org " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Visit Official Site →</a>
+          </div>
+        `
+      },
+      {
+        name: "AgNext CropVision",
+        description: "AI-based crop inspection system for grain and legume producers.",
+        category: "Image Recognition",
+        website: "https://agnext.in ",
+        details: `
+          <p>AgNext uses AI to analyze crop images and detect pests and diseases in grains and legumes. It's widely used in India and Southeast Asia for quick diagnosis and advisory services.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Image upload for instant diagnosis</li>
+            <li>Pest and disease library</li>
+            <li>Treatment recommendations</li>
+            <li>Multilingual interface</li>
+            <li>Integration with extension services</li>
+          </ul>
+          <p><strong>Available on:</strong> iOS, Android</p>
+          <p><strong>Cost:</strong> Free</p>
+          <div class="mt-4">
+            <a href="https://agnext.in " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Visit Official Site →</a>
+          </div>
+        `
+      },
+      {
+        name: "PestNet (by Nuru)",
+        description: "Open-source AI model for pest detection in cassava crops in Africa.",
+        category: "Mobile Apps",
+        website: "https://pestnet.org ",
+        details: `
+          <p>PestNet is an open-source AI project built on Nuru, specifically designed for cassava farmers in East Africa. It runs on Android devices and detects brown streak virus and green mite infestations.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Offline operation</li>
+            <li>Free and open source</li>
+            <li>Works without internet</li>
+            <li>Used by FAO and local extension workers</li>
+            <li>Community-supported updates</li>
+          </ul>
+          <p><strong>Available on:</strong> Android</p>
+          <p><strong>Cost:</strong> Free (open source)</p>
+          <div class="mt-4">
+            <a href="https://pestnet.org " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Visit Official Site →</a>
+          </div>
+        `
+      },
+      {
+        name: "AgriApp PestScan",
+        description: "AI-powered pest detection via mobile uploads for Indian and African farmers.",
+        category: "Mobile Apps",
+        website: "https://www.agriapp.io ",
+        playStoreLink: "https://play.google.com/store/apps/details?id=com.agriapp.farmer ",
+        appStoreLink: "https://apps.apple.com/app/agriapp/id1499952224 ",
+        details: `
+          <p>AgriApp PestScan lets users upload images of infected plants and receive instant diagnosis powered by deep learning models trained on regional crops and pests.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>AI-based pest and disease detection</li>
+            <li>Localized crop database</li>
+            <li>Multilingual interface</li>
+            <li>Market price integration</li>
+            <li>Offline mode for rural areas</li>
+          </ul>
+          <p><strong>Available on:</strong> iOS, Android</p>
+          <p><strong>Cost:</strong> Free with optional premium features</p>
+          <div class="mt-4 flex space-x-4">
+            <a href="https://play.google.com/store/apps/details?id=com.agriapp.farmer " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Download on Google Play →</a>
+            <a href="https://apps.apple.com/app/agriapp/id1499952224 " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Download on App Store →</a>
+          </div>
+        `
+      },
+      {
+        name: "Sentinel Hub for Agriculture",
+        description: "Satellite-based pest and disease monitoring using AI analytics.",
+        category: "Drone Integration",
+        website: "https://www.sentinel-hub.com ",
+        details: `
+          <p>Sentinel Hub provides satellite data and AI-based analytics to monitor pest outbreaks over large areas. This platform is used by governments and research institutions for early warning systems.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>NDVI and EVI index mapping</li>
+            <li>Detects stress zones indicative of pests</li>
+            <li>Historical trend analysis</li>
+            <li>Integration with drone and sensor data</li>
+            <li>API access for developers</li>
+          </ul>
+          <p><strong>Best For:</strong> Government agencies, research centers, and large-scale agribusinesses.</p>
+          <div class="mt-4">
+            <a href="https://www.sentinel-hub.com " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Visit Official Site →</a>
+          </div>
+        `
+      },
+      {
+        name: "CassavaScan",
+        description: "AI app for detecting cassava pests in sub-Saharan Africa.",
+        category: "Mobile Apps",
+        website: "https://cscansolutions.com ",
+        playStoreLink: "https://play.google.com/store/apps/details?id=com.cscansolutions.cassavascan ",
+        details: `
+          <p>CassavaScan helps smallholder farmers detect cassava mosaic and brown streak disease using AI image analysis. Developed in collaboration with IITA and FAO.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>On-device AI processing</li>
+            <li>Step-by-step treatment guidance</li>
+            <li>No internet required</li>
+            <li>Field guides and video tutorials</li>
+            <li>Support for local languages</li>
+          </ul>
+          <p><strong>Available on:</strong> Android</p>
+          <p><strong>Cost:</strong> Free</p>
+          <div class="mt-4">
+            <a href="https://play.google.com/store/apps/details?id=com.cscansolutions.cassavascan " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Download on Google Play →</a>
+          </div>
+        `
+      },
+      {
+        name: "Hello Tractor PestAlert",
+        description: "AI-enhanced pest alerts integrated into tractor-sharing platform.",
+        category: "Mobile Apps",
+        website: "https://hellotractor.com ",
+        playStoreLink: "https://play.google.com/store/apps/details?id=com.hellotractor.app.release ",
+        appStoreLink: "https://apps.apple.com/us/app/hello-tractor/id1136892044 ",
+        details: `
+          <p>Hello Tractor’s PestAlert module gives farmers pest warnings based on location, crop type, and historical outbreak data. Integrated with tractor booking and farming advice.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Location-based pest alerts</li>
+            <li>Push notifications</li>
+            <li>Tractor rental marketplace</li>
+            <li>Video tutorials and agronomy tips</li>
+            <li>Available in English and French</li>
+          </ul>
+          <p><strong>Available on:</strong> iOS, Android</p>
+          <p><strong>Cost:</strong> Free</p>
+          <div class="mt-4 flex space-x-4">
+            <a href="https://play.google.com/store/apps/details?id=com.hellotractor.app.release " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Google Play →</a>
+            <a href="https://apps.apple.com/us/app/hello-tractor/id1136892044 " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">App Store →</a>
+          </div>
+        `
+      },
+      {
+        name: "FarmSense AI",
+        description: "AI-based pest identification using trap data and image recognition.",
+        category: "IoT Sensors",
+        website: "https://farmsense.ai ",
+        details: `
+          <p>FarmSense AI detects flying pests using automated traps and machine learning. It identifies species and population trends to help farmers time their interventions effectively.</p>
+          <p><strong>How it works:</strong> Insect traps equipped with AI cameras capture images of pests and send data to a cloud dashboard that tracks seasonal trends and forecasts outbreaks.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Automated pest counting</li>
+            <li>Species-level identification</li>
+            <li>Trap data integration</li>
+            <li>Predictive modeling</li>
+            <li>Compatible with farm management software</li>
+          </ul>
+          <p><strong>Available on:</strong> Web and mobile apps</p>
+          <p><strong>Cost:</strong> Freemium model</p>
+          <div class="mt-4">
+            <a href="https://farmsense.ai " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Visit Official Site →</a>
+          </div>
+        `
+      },
+      {
+        name: "AgriWebb Pest Tracker",
+        description: "Livestock and crop pest monitoring with team coordination tools.",
+        category: "Mobile Apps",
+        website: "https://www.agriwebb.com ",
+        playStoreLink: "https://play.google.com/store/apps/details?id=com.agriwebb.app.release ",
+        appStoreLink: "https://apps.apple.com/us/app/agriwebb/id1234567890 ",
+        details: `
+          <p>AgriWebb's Pest Tracker enables farmers to log pest sightings, share notes, and coordinate treatment plans with teams. Especially useful for mixed-use and livestock farms.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Team collaboration and task assignment</li>
+            <li>Photo uploads and notes</li>
+            <li>Weather and climate integration</li>
+            <li>Pest lifecycle tracking</li>
+            <li>Compliance-ready records</li>
+          </ul>
+          <p><strong>Available on:</strong> iOS, Android, Web</p>
+          <p><strong>Cost:</strong> Freemium model</p>
+          <div class="mt-4 flex space-x-4">
+            <a href="https://play.google.com/store/apps/details?id=com.agriwebb.app.release " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Google Play →</a>
+            <a href="https://apps.apple.com/us/app/agriwebb/id1234567890 " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">App Store →</a>
+          </div>
+        `
+      },
+      {
+        name: "Slantrange AI Scouting",
+        description: "AI-powered drone scouting for pest and disease hotspots.",
+        category: "Drone Integration",
+        website: "https://slantrange.com ",
+        details: `
+          <p>Slantrange’s drones capture multispectral images processed by AI to detect pest-prone areas, allowing for targeted spraying and scouting missions.</p>
+          <p><strong>How it works:</strong> Drones fly over fields, capturing plant stress indicators invisible to the human eye. AI identifies pest-infested zones and generates action maps.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Multispectral imaging</li>
+            <li>Chlorophyll and nitrogen analysis</li>
+            <li>Early stress detection</li>
+            <li>Heatmaps for targeted intervention</li>
+            <li>Data export to farm ERP systems</li>
+          </ul>
+          <p><strong>Available on:</strong> Web and mobile apps</p>
+          <p><strong>Cost:</strong> Subscription-based</p>
+          <div class="mt-4">
+            <a href="https://slantrange.com " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Visit Official Site →</a>
+          </div>
+        `
+      },
+      {
+        name: "AgriBusines Pest ID",
+        description: "AI-powered pest identification tool for Indian and African farmers.",
+        category: "Mobile Apps",
+        website: "https://www.agribusiness.in ",
+        playStoreLink: "https://play.google.com/store/apps/details?id=com.agribusiness ",
+        details: `
+          <p>AgriBusines' Pest ID feature allows farmers to upload images of pests and receive identification and treatment suggestions instantly. Includes multilingual support and localized advice.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Photo-based pest identification</li>
+            <li>Step-by-step treatment guide</li>
+            <li>Local language support</li>
+            <li>Market prices and weather alerts</li>
+            <li>Offline mode for remote areas</li>
+          </ul>
+          <p><strong>Available on:</strong> Android</p>
+          <p><strong>Cost:</strong> Free</p>
+          <div class="mt-4">
+            <a href="https://play.google.com/store/apps/details?id=com.agribusiness " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Download on Google Play →</a>
+          </div>
+        `
+      },
+      {
+        name: "PlantVillage (Nuru App)",
+        description: "AI app for cassava farmers to detect diseases and pests.",
+        category: "Mobile Apps",
+        website: "https://plantvillage.psu.edu ",
+        playStoreLink: "https://play.google.com/store/apps/details?id=com.plantvillage.nuru ",
+        details: `
+          <p>Developed by Penn State University, the Nuru app is part of the PlantVillage project. It detects cassava pests and diseases using on-device AI without requiring internet connectivity.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>On-device AI processing</li>
+            <li>No internet required</li>
+            <li>Step-by-step treatment instructions</li>
+            <li>Used by extension officers and NGOs</li>
+            <li>Supports local languages</li>
+          </ul>
+          <p><strong>Available on:</strong> Android</p>
+          <p><strong>Cost:</strong> Free</p>
+          <div class="mt-4">
+            <a href="https://play.google.com/store/apps/details?id=com.plantvillage.nuru " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Download on Google Play →</a>
+          </div>
+        `
+      },
+      {
+        name: "Teralytic Soil & Pest Monitor",
+        description: "Wireless sensors with AI for soil and pest activity detection.",
+        category: "IoT Sensors",
+        website: "https://teralytic.com ",
+        details: `
+          <p>Teralytic's AI-powered sensors detect pest movement and feeding patterns underground using gas and soil activity analysis.</p>
+          <p><strong>How it works:</strong> Teralytic’s wireless sensors detect volatile compounds released by pest activity below ground, triggering alerts before visible damage appears above.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Soil-based pest detection</li>
+            <li>No manual scouting needed</li>
+            <li>Real-time alerts via SMS or app</li>
+            <li>Low maintenance</li>
+            <li>Great for root and soil pests</li>
+          </ul>
+          <p><strong>Available on:</strong> Web, mobile apps</p>
+          <p><strong>Cost:</strong> Contact for pricing</p>
+          <div class="mt-4">
+            <a href="https://teralytic.com " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Visit Official Site →</a>
+          </div>
+        `
+      },
+      {
+        name: "AgriManager Pest Module",
+        description: "AI-driven pest identification within enterprise farm management software.",
+        category: "Cloud Platforms",
+        website: "https://www.agrimanager.com ",
+        details: `
+          <p>AgriManager includes an AI-powered pest identification module that integrates with field data, satellite imagery, and drone reports to provide holistic pest control strategies.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Image upload and AI diagnosis</li>
+            <li>Historical pest pattern analysis</li>
+            <li>Integration with weather and soil sensors</li>
+            <li>Customized treatment plans</li>
+            <li>Export-ready reports for compliance</li>
+          </ul>
+          <p><strong>Available on:</strong> Web</p>
+          <p><strong>Cost:</strong> Paid monthly plans</p>
+          <div class="mt-4">
+            <a href="https://www.agrimanager.com " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Visit Official Site →</a>
+          </div>
+        `
+      },
+      {
+        name: "EOS Cropsio Pest Analytics",
+        description: "AI-based pest forecasting and field scouting using satellite and drone data.",
+        category: "Drone Integration",
+        website: "https://cropsio.com ",
+        details: `
+          <p>Cropsio uses satellite and drone data with AI to forecast pest outbreaks and plan scouting routes. Ideal for large-scale farms across diverse geographies.</p>
+          <p><strong>How it works:</strong> Combines NDVI maps, thermal imaging, and historical pest databases to predict and visualize at-risk zones.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Satellite and drone pest detection</li>
+            <li>Weed and pest zone mapping</li>
+            <li>Field scouting route planning</li>
+            <li>Vegetation index visualization</li>
+            <li>Team collaboration tools</li>
+          </ul>
+          <p><strong>Available on:</strong> Web</p>
+          <p><strong>Cost:</strong> Freemium model</p>
+          <div class="mt-4">
+            <a href="https://cropsio.com " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Visit Official Site →</a>
+          </div>
+        `
+      },
+      {
+        name: "Granular Ag Pest Insights",
+        description: "AI-powered pest prediction for grain and row crop producers.",
+        category: "Cloud Platforms",
+        website: "https://www.granular.ag ",
+        details: `
+          <p>Granular Ag's AI engine predicts pest risk based on crop stage, weather, and historical data. Alerts are sent to farmers for timely intervention.</p>
+          <p><strong>How it works:</strong> Integrates pest life cycle models with satellite and field data to generate heatmaps and spray recommendations.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Pest risk scoring</li>
+            <li>Spray zone optimization</li>
+            <li>Field scouting reports</li>
+            <li>Integration with John Deere equipment</li>
+            <li>Team communication and workflow</li>
+          </ul>
+          <p><strong>Available on:</strong> Web</p>
+          <p><strong>Cost:</strong> Enterprise subscription</p>
+          <div class="mt-4">
+            <a href="https://www.granular.ag " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Visit Official Site →</a>
+          </div>
+        `
+      }
+    ];
+
+    function renderTools(filter = '', search = '') {
+      const container = document.getElementById('toolGrid');
+      container.innerHTML = '';
+      let filtered = tools;
+
+      if (filter) {
+        filtered = filtered.filter(t => t.category === filter);
+      }
+
+      if (search) {
+        const lowerSearch = search.toLowerCase();
+        filtered = filtered.filter(t =>
+          t.name.toLowerCase().includes(lowerSearch) || t.description.toLowerCase().includes(lowerSearch)
+        );
+      }
+
+      filtered.forEach((tool, index) => {
+        const div = document.createElement('div');
+        div.className = 'bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow border border-gray-200';
+        div.innerHTML = `
+          <img src="https://placehold.co/600x300/2f855a/ffffff?text= ${encodeURIComponent(tool.category)}" alt="${tool.name}" class="w-full h-40 object-cover" />
+          <div class="p-6">
+            <span class="text-xs font-semibold text-green-600 uppercase">${tool.category}</span>
+            <h4 class="text-lg font-bold mt-2">${tool.name}</h4>
+            <p class="mt-3 text-gray-700 text-sm">${tool.description}</p>
+            <button onclick="toggleDetails(event, this)" class="mt-4 inline-flex items-center text-green-600 hover:text-green-800 font-medium">
+              Read More
+              <svg class="ml-1 w-4 h-4 transition-transform duration-300 rotate-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="transition-max-h mt-4 text-sm text-gray-700">
+              ${tool.details}
+            </div>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function toggleDetails(e, btn) {
+      e.preventDefault();
+      const icon = btn.querySelector('.rotate-icon');
+      const details = btn.nextElementSibling;
+      details.classList.toggle('expanded');
+      icon.classList.toggle('open');
+    }
+
+    function applyCategory(category) {
+      document.getElementById('categoryFilter').value = category;
+      filterTools();
+    }
+
+    function filterTools() {
+      const search = document.getElementById('searchInput').value.trim();
+      const category = document.getElementById('categoryFilter').value;
+      renderTools(category, search);
+    }
+
+    // Search suggestion logic
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.trim().toLowerCase();
+      if (!query) {
+        searchResults.classList.add('hidden');
+        return;
+      }
+
+      const matches = tools.filter(t =>
+        t.name.toLowerCase().includes(query) || t.description.toLowerCase().includes(query)
+      );
+
+      searchResults.innerHTML = '';
+      if (matches.length > 0) {
+        searchResults.classList.remove('hidden');
+        matches.forEach(tool => {
+          const div = document.createElement('div');
+          div.className = 'p-3 hover:bg-green-100 border-b last:border-b-0 cursor-pointer';
+          div.textContent = `${tool.name} - ${tool.description.substring(0, 50)}...`;
+          div.onclick = () => {
+            searchInput.value = tool.name;
+            searchResults.classList.add('hidden');
+            renderTools('', tool.name);
+          };
+          searchResults.appendChild(div);
+        });
+      } else {
+        searchResults.classList.add('hidden');
+      }
+    });
+
+    window.addEventListener('click', (e) => {
+      if (!searchResults.contains(e.target) && e.target !== searchInput) {
+        searchResults.classList.add('hidden');
+      }
+    });
+
+    // Initial render
+    renderTools();
+  </script>
+</body>
+</html>

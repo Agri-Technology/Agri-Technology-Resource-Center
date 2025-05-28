@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Irrigation Systems in Modern Farming</title>
+  <script src="https://cdn.tailwindcss.com "></script>
+  <style>
+    .transition-max-h {
+      transition: max-height 0.3s ease-out;
+      overflow: hidden;
+      max-height: 0;
+    }
+
+    .transition-max-h.expanded {
+      max-height: 500px;
+      overflow: visible;
+    }
+
+    .rotate-icon {
+      transform: rotate(0deg);
+      transition: transform 0.3s ease;
+    }
+
+    .rotate-icon.open {
+      transform: rotate(180deg);
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- Header -->
+  <header class="bg-green-700 text-white shadow-lg sticky top-0 z-10">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold">Agri-Technology Resource Center</h1>
+      <a href="/" class="hover:underline">Home</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-green-600 to-teal-500 text-white py-16">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Smart Irrigation Systems in Modern Farming</h2>
+      <p class="text-lg md:text-xl max-w-3xl mx-auto">
+        Discover how IoT-based irrigation systems are revolutionizing water management in agriculture.
+      </p>
+    </div>
+  </section>
+
+  <!-- Search & Filter Bar -->
+  <section class="py-6 bg-white shadow-sm">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
+        <input 
+          type="text" 
+          placeholder="Search by system name or feature..." 
+          id="searchInput"
+          class="w-full md:w-1/2 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400"
+        />
+        <select id="categoryFilter" class="w-full md:w-auto p-3 border border-gray-300 rounded-md bg-white text-gray-700">
+          <option value="">All Categories</option>
+          <option value="Drip Irrigation">Drip Irrigation</option>
+          <option value="Sprinkler Systems">Sprinkler Systems</option>
+          <option value="IoT Integration">IoT Integration</option>
+          <option value="Water Conservation">Water Conservation</option>
+          <option value="Soil Sensors">Soil Sensors</option>
+        </select>
+        <button onclick="filterSystems()" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-md transition-colors">
+          Search
+        </button>
+      </div>
+
+      <!-- Search Suggestions -->
+      <div id="searchResults" class="mt-2 bg-white border border-gray-300 rounded-md shadow-md hidden max-h-64 overflow-y-auto z-20 w-full md:w-1/2">
+        <!-- Results will be injected here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container mx-auto px-6 py-12 space-y-16">
+
+    <!-- Introduction -->
+    <section>
+      <h3 class="text-2xl font-semibold text-green-700 mb-6">Introduction to Smart Irrigation</h3>
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <p class="mb-4">
+          Smart irrigation systems use sensors, automation, and data analytics to optimize water usage and improve crop yields. These systems integrate soil moisture readings, weather forecasts, and evapotranspiration (ET) data to determine when and how much water crops need.
+        </p>
+        <p>
+          In modern farming, where water scarcity and climate change pose major challenges, smart irrigation offers a sustainable solution that conserves resources while maintaining productivity.
+        </p>
+      </div>
+    </section>
+
+    <!-- Types of Smart Irrigation Systems -->
+    <section>
+      <h3 class="text-2xl font-semibold text-green-700 mb-6">Types of Smart Irrigation Systems</h3>
+      <div id="systemGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- System Cards will be inserted here dynamically by JS -->
+      </div>
+    </section>
+
+    <!-- Browse by Category -->
+    <section>
+      <h3 class="text-2xl font-semibold text-green-700 mb-6">Browse by Technology Type</h3>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div onclick="applyCategory('Drip Irrigation')" class="bg-green-100 text-green-800 p-4 rounded-lg text-center cursor-pointer hover:bg-green-200 transition-colors">
+          Drip Irrigation
+        </div>
+        <div onclick="applyCategory('Sprinkler Systems')" class="bg-green-100 text-green-800 p-4 rounded-lg text-center cursor-pointer hover:bg-green-200 transition-colors">
+          Sprinkler Systems
+        </div>
+        <div onclick="applyCategory('IoT Integration')" class="bg-green-100 text-green-800 p-4 rounded-lg text-center cursor-pointer hover:bg-green-200 transition-colors">
+          IoT Integration
+        </div>
+        <div onclick="applyCategory('Water Conservation')" class="bg-green-100 text-green-800 p-4 rounded-lg text-center cursor-pointer hover:bg-green-200 transition-colors">
+          Water Conservation
+        </div>
+        <div onclick="applyCategory('Soil Sensors')" class="bg-green-100 text-green-800 p-4 rounded-lg text-center cursor-pointer hover:bg-green-200 transition-colors">
+          Soil Sensors
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits -->
+    <section>
+      <h3 class="text-2xl font-semibold text-green-700 mb-6">Benefits of Smart Irrigation</h3>
+      <ul class="space-y-4 list-disc pl-5">
+        <li><strong>Water Efficiency:</strong> Reduces water waste by up to 50% through precise delivery.</li>
+        <li><strong>Improved Crop Yields:</strong> Optimized watering schedules enhance plant health and growth rates.</li>
+        <li><strong>Energy Savings:</strong> Reduces pumping costs by minimizing unnecessary water use.</li>
+        <li><strong>Remote Monitoring:</strong> Allows farmers to control irrigation via smartphones or web apps.</li>
+        <li><strong>Drought Resilience:</strong> Helps maintain crop production during dry spells with minimal inputs.</li>
+        <li><strong>Data-Driven Decisions:</strong> Integrates with weather APIs and soil sensors for adaptive control.</li>
+      </ul>
+    </section>
+
+    <!-- Real-World Applications -->
+    <section>
+      <h3 class="text-2xl font-semibold text-green-700 mb-6">Real-World Applications</h3>
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <p class="mb-4">
+          Many farms around the world have adopted smart irrigation technologies:
+        </p>
+        <ul class="list-disc pl-5 space-y-2">
+          <li><strong>Israel:</strong> Netafim’s drip irrigation systems are used globally for precision water delivery.</li>
+          <li><strong>California:</strong> Vineyards use smart controllers linked to satellite weather data to reduce water use by 30%.</li>
+          <li><strong>India:</strong> Startups like <em>Fasal</em> and <em>Intello Labs</em> provide smart irrigation solutions tailored for smallholder farms.</li>
+          <li><strong>Australia:</strong> Farmers use AgriWebb to track field moisture and automate irrigation decisions across large properties.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Tools & Platforms -->
+    <section>
+      <h3 class="text-2xl font-semibold text-green-700 mb-6">Popular Smart Irrigation Platforms</h3>
+      <div id="platformGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h4 class="font-bold text-lg mb-2">Netafim</h4>
+          <p>Netafim's smart drip irrigation integrates with cloud platforms and mobile apps to control water flow based on real-time soil and weather data.</p>
+          <a href="https://www.netafim.com " target="_blank" class="inline-block mt-3 text-green-600 hover:text-green-800 font-medium">Visit Website →</a>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h4 class="font-bold text-lg mb-2">Arable</h4>
+          <p>Arable combines weather sensing, soil monitoring, and AI analytics into one device to help manage irrigation and fertilization automatically.</p>
+          <a href="https://www.arable.com " target="_blank" class="inline-block mt-3 text-green-600 hover:text-green-800 font-medium">Visit Website →</a>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h4 class="font-bold text-lg mb-2">Rain Bird</h4>
+          <p>Rain Bird’s smart controllers adjust watering schedules daily using local weather data and soil conditions to prevent overwatering.</p>
+          <a href="https://www.rainbird.com " target="_blank" class="inline-block mt-3 text-green-600 hover:text-green-800 font-medium">Visit Website →</a>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h4 class="font-bold text-lg mb-2">Teralytic</h4>
+          <p>Teralytic’s wireless soil sensors monitor moisture levels and communicate with irrigation systems to ensure optimal hydration without human intervention.</p>
+          <a href="https://teralytic.com " target="_blank" class="inline-block mt-3 text-green-600 hover:text-green-800 font-medium">Visit Website →</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-green-800 text-white py-12 mt-16">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <h3 class="text-xl font-bold mb-4">Agri-Technology Resource Center</h3>
+          <p class="text-green-200">Connecting farmers and researchers with the future of agriculture through innovative technology and knowledge sharing.</p>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+          <ul class="space-y-2">
+            <li><a href="../index.html" class="text-green-200 hover:text-white transition-colors block">Home</a></li>
+            <li><a href="../index.html#resources" class="text-green-200 hover:text-white transition-colors block">Resources</a></li>
+            <li><a href="../index.html#news" class="text-green-200 hover:text-white transition-colors block">News</a></li>
+            <li><a href="../index.html#about" class="text-green-200 hover:text-white transition-colors block">About Us</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-4">Contact Information</h3>
+          <address class="not-italic text-green-200">
+            <p>Email: agritechnologyresourcecenter@gmail.com</p>
+            <p>Phone: +256 (706) 691-486</p>
+          </address>
+        </div>
+      </div>
+      <div class="border-t border-green-700 mt-8 pt-6 text-center text-green-300">
+        <p>&copy; 2025 Agri-Technology Resource Center. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript Logic -->
+  <script>
+    const systems = [
+      {
+        name: "Drip Irrigation",
+        description: "Delivers water directly to the root zone through tubes or emitters.",
+        category: "Drip Irrigation",
+        details: `
+          <p>Drip irrigation is the most efficient method for delivering water to plants. It uses low-pressure tubing with emitters to deliver water drop-by-drop right at the root zone, reducing evaporation and runoff.</p>
+          <p><strong>How it works:</strong> A network of pipes and emitters delivers water slowly and directly to plant roots. Can be automated with timers or smart controllers linked to soil sensors and weather stations.</p>
+          <p><strong>Best for:</strong> Orchards, vineyards, vegetable gardens, greenhouse farming.</p>
+          <p><strong>Water savings:</strong> Up to 60% compared to flood or sprinkler systems.</p>
+        `
+      },
+      {
+        name: "Sprinkler Systems",
+        description: "Overhead spray systems that simulate natural rainfall.",
+        category: "Sprinkler Systems",
+        details: `
+          <p>Sprinkler systems spray water over crops, simulating rainfall. They are widely used in large fields and pastures.</p>
+          <p><strong>How it works:</strong> Pressurized water flows through pipes to sprinklers mounted on risers or moving machines like center pivots. Timers or smart controllers regulate frequency and duration.</p>
+          <p><strong>Best for:</strong> Corn, wheat, soybean, pastureland, turf grass.</p>
+          <p><strong>Smart versions:</strong> Integrate with weather data and soil sensors to avoid watering during rain or high humidity.</p>
+        `
+      },
+      {
+        name: "IoT-Based Controllers",
+        description: "Internet-connected devices that automate irrigation decisions.",
+        category: "IoT Integration",
+        details: `
+          <p>IoT-based controllers collect data from soil sensors, weather APIs, and historical patterns to optimize irrigation schedules.</p>
+          <p><strong>How it works:</strong> Devices like Arable Mark, Teralytic sensors, or Netafim controllers gather real-time data and adjust water delivery accordingly. Some systems send alerts or allow remote control via mobile apps.</p>
+          <p><strong>Key features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Automated scheduling</li>
+            <li>Mobile app integration</li>
+            <li>Cloud-based analytics</li>
+            <li>Integration with soil sensors and weather services</li>
+            <li>Support for SMS/email alerts</li>
+          </ul>
+        `
+      },
+      {
+        name: "Soil Moisture Sensors",
+        description: "Devices that measure soil water content for intelligent irrigation decisions.",
+        category: "Soil Sensors",
+        details: `
+          <p>Soil moisture sensors detect the amount of water present in the soil. This data helps determine whether irrigation is needed and how much water to apply.</p>
+          <p><strong>How it works:</strong> Capacitive or resistive sensors embedded in the soil transmit moisture readings to irrigation controllers. Data can be accessed via web dashboards or mobile apps.</p>
+          <p><strong>Types:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li><strong>Capacitive:</strong> Measures dielectric permittivity to estimate water content.</li>
+            <li><strong>Resistive:</strong> Uses two probes to measure resistance between them.</li>
+            <li><strong>Tensiometers:</strong> Mechanical sensors measuring soil tension.</li>
+          </ul>
+          <p><strong>Use Cases:</strong> Vineyards, orchards, greenhouses, row crops.</p>
+        `
+      },
+      {
+        "name": "Center Pivot Irrigation",
+        "description": "Rotating sprinkler systems ideal for large-scale farms.",
+        "category": "Sprinkler Systems",
+        "details": `
+          <p>Center pivot irrigation uses long spans of sprinklers rotating around a central pivot point, covering circular fields efficiently.</p>
+          <p><strong>How it works:</strong> Powered by motors, these systems move slowly across fields, applying water uniformly. Smart versions include GPS tracking and auto-adjustments based on soil moisture data.</p>
+          <p><strong>Best for:</strong> Large fields of corn, wheat, cotton, and soybeans.</p>
+          <p><strong>Water efficiency:</strong> Moderate to high depending on smart controls and weather integration.</p>
+          <p><strong>Providers:</strong> Valmont Industries, Lindsay Corporation, Reinke Manufacturing.</p>
+        `
+      },
+      {
+        name: "Weather-Based Controllers",
+        description: "Irrigation systems that adjust watering based on current weather data.",
+        category: "IoT Integration",
+        details: `
+          <p>These smart controllers adjust irrigation schedules based on live weather data such as rainfall, temperature, and humidity.</p>
+          <p><strong>How it works:</strong> Connects to local weather stations or online services (e.g., Weather Underground) to adapt watering schedules dynamically. Ideal for residential lawns and commercial landscapes.</p>
+          <p><strong>Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Adjusts watering based on forecast</li>
+            <li>Skips irrigation during rain</li>
+            <li>Can be managed remotely via smartphone</li>
+            <li>Reduces water waste significantly</li>
+          </ul>
+          <p><strong>Examples:</strong> Rachio, Rain Bird ESP-Si Smart Controller, Orbit B-Hyve.</p>
+        `
+      },
+      {
+        name: "Solar-Powered Irrigation",
+        description: "Uses solar energy to pump water for irrigation in off-grid areas.",
+        category: "Water Conservation",
+        details: `
+          <p>Solar-powered irrigation systems use photovoltaic panels to power pumps that draw water from wells, rivers, or reservoirs for automated irrigation.</p>
+          <p><strong>How it works:</strong> Solar panels generate electricity during daylight hours, powering submersible or surface pumps. Some systems include battery backups or smart controllers to schedule irrigation during peak sunlight.</p>
+          <p><strong>Best for:</strong> Remote farms, drought-prone regions, developing countries with limited grid access.</p>
+          <p><strong>Advantages:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>No fuel or electricity cost</li>
+            <li>Low maintenance</li>
+            <li>Environmentally friendly</li>
+            <li>Can operate off-grid</li>
+          </ul>
+        `
+      },
+      {
+        name: "DSS (Decision Support Systems)",
+        description: "AI and analytics tools that guide irrigation planning.",
+        category: "IoT Integration",
+        details: `
+          <p>Decision support systems combine sensor data, satellite imagery, and machine learning models to recommend irrigation strategies.</p>
+          <p><strong>How it works:</strong> Data from soil sensors, drones, and satellites feed into a centralized platform that generates irrigation plans based on crop stage, soil condition, and upcoming weather.</p>
+          <p><strong>Used by:</strong> Precision agriculture companies like Granular Ag, John Deere Operations Center, and CropX.</p>
+          <p><strong>Benefits:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Optimized water use</li>
+            <li>Increased yield predictability</li>
+            <li>Cost-effective input management</li>
+            <li>Scalable for large agribusinesses</li>
+          </ul>
+        `
+      },
+      {
+        name: "Subsurface Drip Irrigation",
+        description: "Drip systems installed below ground for maximum efficiency.",
+        category: "Drip Irrigation",
+        details: `
+          <p>Subsurface drip irrigation (SDI) places drip lines underground, delivering water directly to the root zone while minimizing evaporation and weed growth.</p>
+          <p><strong>How it works:</strong> Water is delivered beneath the soil surface through buried drip lines, controlled by timers or smart controllers that respond to soil moisture readings.</p>
+          <p><strong>Best for:</strong> High-value crops like strawberries, tomatoes, potatoes, and cotton.</p>
+          <p><strong>Benefits:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>High water-use efficiency</li>
+            <li>Reduces disease risk by keeping foliage dry</li>
+            <li>Minimizes weed germination</li>
+            <li>Long-term durability</li>
+          </ul>
+        `
+      },
+      {
+        name: "Capacitive Soil Sensors",
+        description: "Electronic sensors that measure soil water content non-invasively.",
+        category: "Soil Sensors",
+        details: `
+          <p>Capacitive soil sensors measure the dielectric constant of the soil to estimate its water content. These sensors are often used in conjunction with smart irrigation controllers.</p>
+          <p><strong>How it works:</strong> The sensor emits an electric field and measures changes in capacitance caused by varying moisture levels.</p>
+          <p><strong>Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Non-invasive installation</li>
+            <li>Continuous monitoring</li>
+            <li>Works with irrigation automation systems</li>
+            <li>Compatible with mobile apps and cloud platforms</li>
+          </ul>
+          <p><strong>Popular Models:</strong> Chameleon Soil Sensor, CropX Smart Soil Probe, Teralytic Wireless Sensors.</p>
+        `
+      },
+      {
+        name: "Smart Valves & Actuators",
+        description: "Automated valves that regulate water flow based on sensor input.",
+        category: "IoT Integration",
+        details: `
+          <p>Smart valves control the flow of water to specific zones based on sensor feedback and weather conditions. These are commonly used in drip and sprinkler systems.</p>
+          <p><strong>How it works:</strong> Controlled by microprocessors, smart valves receive signals from soil sensors and weather APIs to turn on/off or modulate water flow precisely.</p>
+          <p><strong>Benefits:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Zone-based water delivery</li>
+            <li>Remote control via smartphone</li>
+            <li>Integration with farm ERP systems</li>
+            <li>Saves time and labor</li>
+          </ul>
+          <p><strong>Providers:</strong> Netafim, Rain Bird, Cloudfarms, Arable</p>
+        `
+      }
+    ];
+
+    function renderSystems(filter = '', search = '') {
+      const container = document.getElementById('systemGrid');
+      container.innerHTML = '';
+      let filtered = systems;
+
+      if (filter) {
+        filtered = filtered.filter(s => s.category === filter);
+      }
+
+      if (search) {
+        const lowerSearch = search.toLowerCase();
+        filtered = filtered.filter(s =>
+          s.name.toLowerCase().includes(lowerSearch) || s.description.toLowerCase().includes(lowerSearch)
+        );
+      }
+
+      filtered.forEach((system, index) => {
+        const div = document.createElement('div');
+        div.className = 'bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow border border-gray-200';
+        div.innerHTML = `
+          <img src="https://placehold.co/600x300/2f855a/ffffff?text= ${encodeURIComponent(system.category)}" alt="${system.name} Cover" class="w-full h-40 object-cover" />
+          <div class="p-6">
+            <span class="text-xs font-semibold text-green-600 uppercase">${system.category}</span>
+            <h4 class="text-lg font-bold mt-2">${system.name}</h4>
+            <p class="mt-3 text-gray-700 text-sm">${system.description}</p>
+            <button onclick="toggleDetails(event, this)" class="mt-4 inline-flex items-center text-green-600 hover:text-green-800 font-medium">
+              Read More
+              <svg class="ml-1 w-4 h-4 transition-transform duration-300 rotate-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="transition-max-h mt-4 text-sm text-gray-700">
+              ${system.details}
+            </div>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function toggleDetails(e, btn) {
+      e.preventDefault();
+      const icon = btn.querySelector('.rotate-icon');
+      const details = btn.nextElementSibling;
+      details.classList.toggle('expanded');
+      icon.classList.toggle('open');
+    }
+
+    function applyCategory(category) {
+      document.getElementById('categoryFilter').value = category;
+      filterSystems();
+    }
+
+    function filterSystems() {
+      const search = document.getElementById('searchInput').value.trim();
+      const category = document.getElementById('categoryFilter').value;
+      renderSystems(category, search);
+    }
+
+    // Search suggestion logic
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.trim().toLowerCase();
+      if (!query) {
+        searchResults.classList.add('hidden');
+        return;
+      }
+
+      const matches = systems.filter(s =>
+        s.name.toLowerCase().includes(query) || s.description.toLowerCase().includes(query)
+      );
+
+      searchResults.innerHTML = '';
+      if (matches.length > 0) {
+        searchResults.classList.remove('hidden');
+        matches.forEach(system => {
+          const div = document.createElement('div');
+          div.className = 'p-3 hover:bg-green-100 border-b last:border-b-0 cursor-pointer';
+          div.textContent = `${system.name} - ${system.description.substring(0, 50)}...`;
+          div.onclick = () => {
+            searchInput.value = system.name;
+            searchResults.classList.add('hidden');
+            renderSystems('', system.name);
+          };
+          searchResults.appendChild(div);
+        });
+      } else {
+        searchResults.classList.add('hidden');
+      }
+    });
+
+    window.addEventListener('click', (e) => {
+      if (!searchResults.contains(e.target) && e.target !== searchInput) {
+        searchResults.classList.add('hidden');
+      }
+    });
+
+    // Initial render
+    renderSystems();
+  </script>
+</body>
+</html>

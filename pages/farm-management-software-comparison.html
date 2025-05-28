@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Farm Management Software Comparison</title>
+  <script src="https://cdn.tailwindcss.com "></script>
+  <style>
+    .transition-max-h {
+      transition: max-height 0.3s ease-out;
+      overflow: hidden;
+      max-height: 0;
+    }
+
+    .transition-max-h.expanded {
+      max-height: 500px;
+      overflow: visible;
+    }
+
+    .rotate-icon {
+      transform: rotate(0deg);
+      transition: transform 0.3s ease;
+    }
+
+    .rotate-icon.open {
+      transform: rotate(180deg);
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- Header -->
+  <header class="bg-green-700 text-white shadow-lg sticky top-0 z-10">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold">Agri-Technology Resource Center</h1>
+      <a href="../index.html" class="hover:underline">Home</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-green-600 to-teal-500 text-white py-16">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Farm Management Software Comparison</h2>
+      <p class="text-lg md:text-xl max-w-3xl mx-auto">
+        Compare the best farm management tools that help track crops, manage labor, monitor soil sensors, and optimize yields.
+      </p>
+    </div>
+  </section>
+
+  <!-- Search & Filter Bar -->
+  <section class="py-6 bg-white shadow-sm">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
+        <input 
+          type="text" 
+          placeholder="Search by software name or feature..." 
+          id="searchInput"
+          class="w-full md:w-1/2 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400"
+        />
+        <select id="categoryFilter" class="w-full md:w-auto p-3 border border-gray-300 rounded-md bg-white text-gray-700">
+          <option value="">All Categories</option>
+          <option value="Crop Planning">Crop Planning</option>
+          <option value="Inventory & Sales">Inventory & Sales</option>
+          <option value="Labor Management">Labor Management</option>
+          <option value="IoT Integration">IoT Integration</option>
+          <option value="Financial Tracking">Financial Tracking</option>
+        </select>
+        <button onclick="filterSoftware()" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-md transition-colors">
+          Search
+        </button>
+      </div>
+
+      <!-- Search Suggestions -->
+      <div id="searchResults" class="mt-2 bg-white border border-gray-300 rounded-md shadow-md hidden max-h-64 overflow-y-auto z-20 w-full md:w-1/2">
+        <!-- Results will be injected here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container mx-auto px-6 py-12 space-y-16">
+
+    <!-- Featured Software -->
+    <section>
+      <h3 class="text-2xl font-semibold text-green-700 mb-6">Featured Farm Management Software</h3>
+      <div id="softwareGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Software Cards will be inserted here dynamically by JS -->
+      </div>
+    </section>
+
+    <!-- Browse by Category -->
+    <section>
+      <h3 class="text-2xl font-semibold text-green-700 mb-6">Browse by Feature</h3>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div onclick="applyCategory('Crop Planning')" class="bg-green-100 text-green-800 p-4 rounded-lg text-center cursor-pointer hover:bg-green-200 transition-colors">
+          Crop Planning
+        </div>
+        <div onclick="applyCategory('Inventory & Sales')" class="bg-green-100 text-green-800 p-4 rounded-lg text-center cursor-pointer hover:bg-green-200 transition-colors">
+          Inventory & Sales
+        </div>
+        <div onclick="applyCategory('Labor Management')" class="bg-green-100 text-green-800 p-4 rounded-lg text-center cursor-pointer hover:bg-green-200 transition-colors">
+          Labor Management
+        </div>
+        <div onclick="applyCategory('IoT Integration')" class="bg-green-100 text-green-800 p-4 rounded-lg text-center cursor-pointer hover:bg-green-200 transition-colors">
+          IoT Integration
+        </div>
+        <div onclick="applyCategory('Financial Tracking')" class="bg-green-100 text-green-800 p-4 rounded-lg text-center cursor-pointer hover:bg-green-200 transition-colors">
+          Financial Tracking
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-green-800 text-white py-12 mt-16">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <h3 class="text-xl font-bold mb-4">Agri-Technology Resource Center</h3>
+          <p class="text-green-200">Connecting farmers and researchers with the future of agriculture through innovative technology and knowledge sharing.</p>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+          <ul class="space-y-2">
+            <li><a href="../index.html" class="text-green-200 hover:text-white transition-colors block">Home</a></li>
+            <li><a href="../index.html#resources" class="text-green-200 hover:text-white transition-colors block">Resources</a></li>
+            <li><a href="../index.html#news" class="text-green-200 hover:text-white transition-colors block">News</a></li>
+            <li><a href="../index.html#about" class="text-green-200 hover:text-white transition-colors block">About Us</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-4">Contact Information</h3>
+          <address class="not-italic text-green-200">
+            <p>Email: agritechnologyresourcecenter@gmail.com</p>
+            <p>Phone: +256 (706) 691-486</p>
+          </address>
+        </div>
+      </div>
+      <div class="border-t border-green-700 mt-8 pt-6 text-center text-green-300">
+        <p>&copy; 2025 Agri-Technology Resource Center. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript Logic -->
+  <script>
+    const softwares = [
+      {
+        name: "FarmERP",
+        description: "Enterprise-level farm resource planning tool for commercial farms.",
+        category: "Crop Planning",
+        developer: "FarmERP Technologies",
+        website: "https://www.farmerp.io ",
+        details: `
+          <p>FarmERP offers modules for crop planning, irrigation scheduling, labor tracking, inventory, and financial reporting. Designed for mid-sized to large farms looking to digitize operations.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Crop rotation and planting calendar</li>
+            <li>Irrigation and fertilizer usage tracking</li>
+            <li>Labor and equipment scheduling</li>
+            <li>Inventory and sales management</li>
+            <li>IoT integration for smart farming</li>
+          </ul>
+          <p><strong>Available on:</strong> Web, iOS, Android</p>
+          <p><strong>Cost:</strong> Subscription-based</p>
+          <div class="mt-4">
+            <a href="https://www.googleadservices.com/pagead/aclk?sa=L&ai=DChcSEwiZldLqvMONAxUEZkECHU9iHtsYABAAGgJ3cw&co=1&gclid=Cj0KCQjwxdXBBhDEARIsAAUkP6hApkmeYKhfPI2vRuOXf_R1LLW_il7sJFXd5DzcDQv3YOFBiB1yZ7EaApFwEALw_wcB&ohost=www.google.com&cid=CAESVuD2yWdX-e9ukn3KMTeitB0h1DRWAjPxyPGrqcuuT2kRJUPULHDRJWcKv_-Tf2ajroHKPepzVxMQZi0ROnUhQ9mnW2VhlMSnZMbm4XPtUVg2vMgQKJdZ&category=acrcp_v1_0&sig=AOD64_2DNLz6Rh5-gHthJBWLBA7Ojjz91g&q&adurl&ved=2ahUKEwiasc3qvMONAxXCR_EDHb4wI2sQ0Qx6BAgcEAE " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Visit Website →</a>
+          </div>
+        `
+      },
+      {
+        name: "AgriWebb",
+        description: "Comprehensive livestock and crop management platform with task automation.",
+        category: "Labor Management",
+        developer: "AgriWebb",
+        website: "https://www.agriwebb.com ",
+        details: `
+          <p>AgriWebb is designed for livestock and mixed-use farms. It includes field activity logs, animal health records, weather alerts, and team collaboration tools.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Livestock health and vaccination tracking</li>
+            <li>Daily field tasks and notes</li>
+            <li>Weather and climate data integration</li>
+            <li>Team communication and workflow</li>
+            <li>Task history and compliance reports</li>
+          </ul>
+          <p><strong>Available on:</strong> iOS, Android, Web</p>
+          <p><strong>Cost:</strong> Freemium + premium plans</p>
+          <div class="mt-4">
+            <a href="https://www.agriwebb.com " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Visit Website →</a>
+          </div>
+        `
+      },
+      {
+        name: "Granular Ag",
+        description: "Field-level farm management system for precision agriculture.",
+        category: "IoT Integration",
+        developer: "Granular",
+        website: "https://www.granular.ag ",
+        details: `
+          <p>Granular Ag provides field-level insights and analytics for grain and row crop producers. It integrates with machinery, seed suppliers, and agronomy services to streamline decision-making.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Field scouting and mapping</li>
+            <li>Fertilizer and chemical application planning</li>
+            <li>Yield forecasting and harvest planning</li>
+            <li>Integration with John Deere and other farm equipment</li>
+            <li>Grower input cost analysis</li>
+          </ul>
+          <p><strong>Available on:</strong> Web</p>
+          <p><strong>Cost:</strong> Contact for pricing</p>
+          <div class="mt-4">
+            <a href="https://www.granular.ag " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Visit Website →</a>
+          </div>
+        `
+      },
+      {
+        name: "FarmLogs",
+        description: "GPS-based farm map and planning tool for U.S. growers.",
+        category: "Crop Planning",
+        developer: "FarmLogs",
+        website: "https://www.farmlogs.com ",
+        details: `
+          <p>FarmLogs helps farmers plan fields, track expenses, and receive weather alerts. Its satellite imagery and scouting tools are ideal for row crop production.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Field maps with GPS boundaries</li>
+            <li>Planting and harvest records</li>
+            <li>Scouting reports with photo uploads</li>
+            <li>Weather alerts and forecasts</li>
+            <li>Expense and income tracking</li>
+          </ul>
+          <p><strong>Available on:</strong> iOS, Android, Web</p>
+          <p><strong>Cost:</strong> Free basic version; premium plans available</p>
+          <div class="mt-4">
+            <a href="https://www.farmlogs.com " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Visit Website →</a>
+          </div>
+        `
+      },
+      {
+        name: "AgriApp",
+        description: "All-in-one digital toolkit for smallholder farmers in Asia and Africa.",
+        category: "Crop Planning",
+        developer: "AgriApp Technologies",
+        website: "https://www.agriapp.io ",
+        playStoreLink: "https://play.google.com/store/apps/details?id=com.agriapp.farmer ",
+        appStoreLink: "https://apps.apple.com/app/agriapp/id1499952224 ",
+        details: `
+          <p>AgriApp offers localized crop calendars, weather updates, pest alerts, and market price tracking tailored for smallholder farmers in India, Kenya, Nigeria, and more.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Crop planning by region and season</li>
+            <li>AI-powered pest detection via image upload</li>
+            <li>Market price comparison</li>
+            <li>Daily weather reports</li>
+            <li>Offline mode for low-connectivity areas</li>
+          </ul>
+          <p><strong>Available on:</strong> iOS, Android</p>
+          <p><strong>Cost:</strong> Free with optional premium features</p>
+          <div class="mt-4 flex space-x-4">
+            <a href="https://play.google.com/store/apps/details?id=com.criyagen&hl=en " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Google Play →</a>
+            <a href="https://apps.apple.com/app/agriapp/id1499952224 " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">App Store →</a>
+          </div>
+        `
+      },
+      {
+        name: "Cropio",
+        description: "Satellite-based monitoring and farm planning tool used globally.",
+        category: "IoT Integration",
+        developer: "Cropio",
+        website: "https://cropio.com ",
+        details: `
+          <p>Cropio uses satellite imagery and AI to monitor crop growth, detect anomalies, and support field scouting. Ideal for large-scale farms across diverse geographies.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Satellite crop monitoring</li>
+            <li>Weed and stress zone detection</li>
+            <li>Field scouting route planning</li>
+            <li>NDVI maps and vegetation index</li>
+            <li>Multi-user access and team coordination</li>
+          </ul>
+          <p><strong>Available on:</strong> Web</p>
+          <p><strong>Cost:</strong> Freemium model</p>
+          <div class="mt-4">
+            <a href="https://cropio.com " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Visit Website →</a>
+          </div>
+        `
+      },
+      {
+        name: "Farmbrite",
+        description: "SaaS farm management software for organic, livestock, and agroforestry farms.",
+        category: "Financial Tracking",
+        developer: "Farmbrite",
+        website: "https://farmbrite.com ",
+        details: `
+          <p>Farmbrite is built for diversified farms including organic, greenhouse, and livestock. It tracks animals, crops, sales, and finances all in one place.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Animal and crop tracking</li>
+            <li>Harvest and sales logging</li>
+            <li>Inventory and supply chain management</li>
+            <li>Employee time tracking</li>
+            <li>Accounting and expense reports</li>
+          </ul>
+          <p><strong>Available on:</strong> Web</p>
+          <p><strong>Cost:</strong> Monthly subscription</p>
+          <div class="mt-4">
+            <a href="https://farmbrite.com " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Visit Website →</a>
+          </div>
+        `
+      },
+      {
+        name: "AgriBusines",
+        description: "Mobile-first app for Indian farmers offering market prices, crop advisory, and weather updates.",
+        category: "Crop Planning",
+        developer: "AgriBusines Pvt. Ltd.",
+        website: "https://www.agribusiness.in ",
+        playStoreLink: "https://play.google.com/store/apps/details?id=com.agribusiness ",
+        details: `
+          <p>AgriBusines offers a mobile-first experience for smallholder farmers in India, Africa, and Latin America. Includes multilingual support and offline access.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Crop calendar and planting guide</li>
+            <li>Soil testing and fertilizer advice</li>
+            <li>Market price updates</li>
+            <li>Weather alerts</li>
+            <li>Multilingual interface</li>
+          </ul>
+          <p><strong>Available on:</strong> Android</p>
+          <p><strong>Cost:</strong> Free</p>
+          <div class="mt-4">
+            <a href="https://play.google.com/store/apps/details?id=com.agribusiness " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Download on Google Play →</a>
+          </div>
+        `
+      },
+      {
+        name: "Hello Tractor STB",
+        description: "Smart tractor booking and farm management solution for African farmers.",
+        category: "Labor Management",
+        developer: "Hello Tractor Ltd.",
+        website: "https://hellotractor.com ",
+        playStoreLink: "https://play.google.com/store/apps/details?id=com.hellotractor.app.release ",
+        appStoreLink: "https://apps.apple.com/us/app/hello-tractor/id1136892044 ",
+        details: `
+          <p>Hello Tractor STB connects farmers with local tractor owners and offers farm planning tools like sowing schedules, yield tracking, and service booking.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Tractor rental marketplace</li>
+            <li>GPS-based tractor location tracking</li>
+            <li>Service reviews and ratings</li>
+            <li>Video tutorials and guides</li>
+            <li>Payment gateway for secure transactions</li>
+          </ul>
+          <p><strong>Available on:</strong> iOS and Android</p>
+          <p><strong>Cost:</strong> Free</p>
+          <div class="mt-4 flex space-x-4">
+            <a href="https://play.google.com/store/apps/details?id=com.hellotractor.app.release " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Download on Google Play →</a>
+            <a href="https://apps.apple.com/us/app/hello-tractor/id1136892044 " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Download on App Store →</a>
+          </div>
+        `
+      },
+      {
+        name: "FarmOS",
+        description: "Open-source farm management platform for sustainable agriculture.",
+        category: "Financial Tracking",
+        developer: "FarmOS Community",
+        website: "https://farmos.org ",
+        details: `
+          <p>FarmOS is an open-source web-based platform for managing organic, regenerative, and permaculture farms. Great for sustainability-focused farmers and CSAs.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Log activities, inputs, and observations</li>
+            <li>Track assets like animals, tools, and plots</li>
+            <li>Plan crop rotations and cover cropping</li>
+            <li>Generate custom reports</li>
+            <li>Self-hosted or cloud-hosted options</li>
+          </ul>
+          <p><strong>Available on:</strong> Web</p>
+          <p><strong>Cost:</strong> Open source (free core features)</p>
+          <div class="mt-4">
+            <a href="https://farmos.org " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Visit Website →</a>
+          </div>
+        `
+      },
+      {
+        name: "AgriManager",
+        description: "All-in-one farm management suite with accounting, logistics, and planning tools.",
+        category: "Inventory & Sales",
+        developer: "AgriManager Inc.",
+        website: "https://www.agrimanager.com ",
+        details: `
+          <p>AgriManager is a powerful SaaS tool for managing crop cycles, farm workers, equipment maintenance, and financial reporting. Used by cooperatives and large agribusinesses.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Crop cycle and harvest tracking</li>
+            <li>Inventory, procurement, and sales</li>
+            <li>Labor and equipment scheduling</li>
+            <li>Financial reporting and budgeting</li>
+            <li>API integrations with IoT sensors</li>
+          </ul>
+          <p><strong>Available on:</strong> Web</p>
+          <p><strong>Cost:</strong> Paid monthly plans</p>
+          <div class="mt-4">
+            <a href="https://www.agrimanager.com " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Visit Website →</a>
+          </div>
+        `
+      },
+      {
+        name: "Cropster",
+        description: "Coffee and specialty crop management platform for traceability and quality control.",
+        category: "Inventory & Sales",
+        developer: "Cropster GmbH",
+        website: "https://www.cropster.com ",
+        details: `
+          <p>Cropster specializes in traceability and quality control for coffee, cacao, and tea farms. Offers full lifecycle tracking from farm to export.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Batch tracking and quality grading</li>
+            <li>Field data collection and lab results</li>
+            <li>Inventory and warehouse management</li>
+            <li>Export-ready documentation</li>
+            <li>Multi-language support</li>
+          </ul>
+          <p><strong>Available on:</strong> Web</p>
+          <p><strong>Cost:</strong> Custom pricing</p>
+          <div class="mt-4">
+            <a href="https://www.cropster.com " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Visit Website →</a>
+          </div>
+        `
+      }
+    ];
+
+    function renderSoftware(filter = '', search = '') {
+      const container = document.getElementById('softwareGrid');
+      container.innerHTML = '';
+      let filtered = softwares;
+
+      if (filter) {
+        filtered = filtered.filter(s => s.category === filter);
+      }
+
+      if (search) {
+        const lowerSearch = search.toLowerCase();
+        filtered = filtered.filter(s => 
+          s.name.toLowerCase().includes(lowerSearch) || s.description.toLowerCase().includes(lowerSearch)
+        );
+      }
+
+      filtered.forEach((software, index) => {
+        const div = document.createElement('div');
+        div.className = 'bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow border border-gray-200';
+        div.innerHTML = `
+          <img src="https://placehold.co/600x300/2f855a/ffffff?text= ${encodeURIComponent(software.category)}" alt="${software.name} Cover" class="w-full h-40 object-cover" />
+          <div class="p-6">
+            <span class="text-xs font-semibold text-green-600 uppercase">${software.category}</span>
+            <h4 class="text-lg font-bold mt-2">${software.name}</h4>
+            <p class="text-sm text-gray-600 mt-2">Developer: ${software.developer}</p>
+            <p class="mt-3 text-gray-700 text-sm">${software.description}</p>
+
+            <button onclick="toggleDetails(event, this)" class="mt-4 inline-flex items-center text-green-600 hover:text-green-800 font-medium">
+              Read More
+              <svg class="ml-1 w-4 h-4 transition-transform duration-300 rotate-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+
+            <div class="transition-max-h mt-4 text-sm text-gray-700">
+              ${software.details}
+            </div>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function toggleDetails(e, btn) {
+      e.preventDefault();
+      const icon = btn.querySelector('.rotate-icon');
+      const details = btn.nextElementSibling;
+
+      // Toggle expanded class
+      details.classList.toggle('expanded');
+
+      // Rotate icon
+      icon.classList.toggle('open');
+    }
+
+    function applyCategory(category) {
+      document.getElementById('categoryFilter').value = category;
+      filterSoftware();
+    }
+
+    function filterSoftware() {
+      const search = document.getElementById('searchInput').value.trim();
+      const category = document.getElementById('categoryFilter').value;
+      renderSoftware(category, search);
+    }
+
+    // Search suggestion logic
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.trim().toLowerCase();
+      if (!query) {
+        searchResults.classList.add('hidden');
+        return;
+      }
+
+      const matches = softwares.filter(s =>
+        s.name.toLowerCase().includes(query) || s.description.toLowerCase().includes(query)
+      );
+
+      searchResults.innerHTML = '';
+      if (matches.length > 0) {
+        searchResults.classList.remove('hidden');
+        matches.forEach(software => {
+          const div = document.createElement('div');
+          div.className = 'p-3 hover:bg-green-100 border-b last:border-b-0 cursor-pointer';
+          div.textContent = `${software.name} - ${software.description.substring(0, 50)}...`;
+          div.onclick = () => {
+            searchInput.value = software.name;
+            searchResults.classList.add('hidden');
+            renderSoftware('', software.name);
+          };
+          searchResults.appendChild(div);
+        });
+      } else {
+        searchResults.classList.add('hidden');
+      }
+    });
+
+    window.addEventListener('click', (e) => {
+      if (!searchResults.contains(e.target) && e.target !== searchInput) {
+        searchResults.classList.add('hidden');
+      }
+    });
+
+    // Initial render
+    renderSoftware();
+  </script>
+</body>
+</html>

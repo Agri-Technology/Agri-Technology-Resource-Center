@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Drones in Precision Agriculture</title>
+  <script src="https://cdn.tailwindcss.com "></script>
+  <style>
+    .transition-max-h {
+      transition: max-height 0.3s ease-out;
+      overflow: hidden;
+      max-height: 0;
+    }
+
+    .transition-max-h.expanded {
+      max-height: 500px;
+      overflow: visible;
+    }
+
+    .rotate-icon {
+      transform: rotate(0deg);
+      transition: transform 0.300ms ease;
+    }
+
+    .rotate-icon.open {
+      transform: rotate(180deg);
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- Header -->
+  <header class="bg-green-700 text-white shadow-lg sticky top-0 z-10">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold">Agri-Technology Resource Center</h1>
+      <a href="/" class="hover:underline">Home</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-green-600 to-teal-500 text-white py-16">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Drones in Precision Agriculture</h2>
+      <p class="text-lg md:text-xl max-w-3xl mx-auto">
+        Discover how drones are transforming crop monitoring, yield prediction, and field scouting through aerial imaging and AI analytics.
+      </p>
+    </div>
+  </section>
+
+  <!-- Search & Filter Bar -->
+  <section class="py-6 bg-white shadow-sm">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
+        <input 
+          type="text" 
+          placeholder="Search by drone type or feature..." 
+          id="searchInput"
+          class="w-full md:w-1/2 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400"
+        />
+        <select id="categoryFilter" class="w-full md:w-auto p-3 border border-gray-300 rounded-md bg-white text-gray-700">
+          <option value="">All Categories</option>
+          <option value="Crop Monitoring">Crop Monitoring</option>
+          <option value="Spraying Drones">Spraying Drones</option>
+          <option value="NDVI Mapping">NDVI Mapping</option>
+          <option value="Soil Analysis">Soil Analysis</option>
+          <option value="Yield Prediction">Yield Prediction</option>
+        </select>
+        <button onclick="filterDrones()" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-md transition-colors">
+          Search
+        </button>
+      </div>
+
+      <!-- Search Suggestions -->
+      <div id="searchResults" class="mt-2 bg-white border border-gray-300 rounded-md shadow-md hidden max-h-64 overflow-y-auto z-20 w-full md:w-1/2">
+        <!-- Results will be injected here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container mx-auto px-6 py-12 space-y-16">
+
+    <!-- Introduction -->
+    <section>
+      <h3 class="text-2xl font-semibold text-green-700 mb-6">Introduction to Agricultural Drones</h3>
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <p class="mb-4">
+          Drones, or Unmanned Aerial Vehicles (UAVs), are revolutionizing modern agriculture by providing high-resolution aerial data that helps farmers monitor crop health, detect stress zones, and optimize input usage like fertilizers and pesticides.
+        </p>
+        <p>
+          With multispectral and thermal imaging capabilities, drones enable precision farming practices such as variable rate application, irrigation planning, and early detection of pests and diseases — all at a fraction of the cost of satellite imagery or manned aircraft.
+        </p>
+      </div>
+    </section>
+
+    <!-- Drone Types & Features -->
+    <section>
+      <h3 class="text-2xl font-semibold text-green-700 mb-6">Types of Agricultural Drones</h3>
+      <div id="droneGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Drone Cards go here via JS -->
+      </div>
+    </section>
+
+    <!-- Browse by Category -->
+    <section>
+      <h3 class="text-2xl font-semibold text-green-700 mb-6">Browse by Use Case</h3>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div onclick="applyCategory('Crop Monitoring')" class="bg-green-100 text-green-800 p-4 rounded-lg text-center cursor-pointer hover:bg-green-200 transition-colors">
+          Crop Monitoring
+        </div>
+        <div onclick="applyCategory('Spraying Drones')" class="bg-green-100 text-green-800 p-4 rounded-lg text-center cursor-pointer hover:bg-green-200 transition-colors">
+          Spraying Drones
+        </div>
+        <div onclick="applyCategory('NDVI Mapping')" class="bg-green-100 text-green-800 p-4 rounded-lg text-center cursor-pointer hover:bg-green-200 transition-colors">
+          NDVI Mapping
+        </div>
+        <div onclick="applyCategory('Soil Analysis')" class="bg-green-100 text-green-800 p-4 rounded-lg text-center cursor-pointer hover:bg-green-200 transition-colors">
+          Soil Analysis
+        </div>
+        <div onclick="applyCategory('Yield Prediction')" class="bg-green-100 text-green-800 p-4 rounded-lg text-center cursor-pointer hover:bg-green-200 transition-colors">
+          Yield Prediction
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits -->
+    <section>
+      <h3 class="text-2xl font-semibold text-green-700 mb-6">Benefits of Using Drones in Farming</h3>
+      <ul class="space-y-4 list-disc pl-5">
+        <li><strong>High-Resolution Field Scouting:</strong> Drones capture detailed images of crops faster than manual scouting.</li>
+        <li><strong>Early Pest & Disease Detection:</strong> Multispectral sensors identify issues invisible to the naked eye.</li>
+        <li><strong>Precision Spraying:</strong> Spraying drones apply fertilizers, pesticides, and herbicides exactly where needed.</li>
+        <li><strong>Improved Water Management:</strong> Thermal imaging detects dry spots for targeted irrigation adjustments.</li>
+        <li><strong>Crop Health Assessment:</strong> Vegetation indices like NDVI help assess plant vigor and nutrient needs.</li>
+        <li><strong>Cost-Effective Data Collection:</strong> Reduces need for satellite or manned flights while improving frequency.</li>
+      </ul>
+    </section>
+
+    <!-- Real-World Applications -->
+    <section>
+      <h3 class="text-2xl font-semibold text-green-700 mb-6">Real-World Applications</h3>
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <p class="mb-4">
+          Drones are now widely used across the globe for various agricultural purposes:
+        </p>
+        <ul class="list-disc pl-5 space-y-2">
+          <li><strong>California Vineyards:</strong> Wineries use drones for vine stress mapping and irrigation optimization.</li>
+          <li><strong>Brazilian Sugarcane Farms:</strong> Drones help monitor large fields and guide fertilizer application.</li>
+          <li><strong>Australia:</strong> Farmers combine drone and satellite data for grazing land management and pasture analysis.</li>
+          <li><strong>India:</strong> Government programs promote drone-based crop insurance verification and spraying of bio-pesticides.</li>
+          <li><strong>Japan:</strong> DJI Agras series drones are extensively used for rice field spraying and pest control.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Popular Drone Platforms -->
+    <section>
+      <h3 class="text-2xl font-semibold text-green-700 mb-6">Popular Agricultural Drones & Platforms</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h4 class="font-bold text-lg mb-2">DJI Agras Series</h4>
+          <p>The DJI Agras line includes drones like T30, T16, and T20 for crop spraying and pesticide application. They come with smart mission planning and load sensing.</p>
+          <a href="https://www.dji.com/ " target="_blank" class="inline-block mt-3 text-green-600 hover:text-green-800 font-medium">Visit Website →</a>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h4 class="font-bold text-lg mb-2">Parrot Bluegrass Fields</h4>
+          <p>This drone features a multispectral camera for vegetation index generation, helping farmers track crop health and optimize inputs.</p>
+          <a href="https://www.parrot.com/ " target="_blank" class="inline-block mt-3 text-green-600 hover:text-green-800 font-medium">Visit Website →</a>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h4 class="font-bold text-lg mb-2">senseFly eBee X</h4>
+          <p>Used for mapping and surveying large farmland, this fixed-wing drone captures high-resolution RGB and multispectral images for field health analysis.</p>
+          <a href="https://www.sensefly.com " target="_blank" class="inline-block mt-3 text-green-600 hover:text-green-800 font-medium">Visit Website →</a>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h4 class="font-bold text-lg mb-2">PrecisionHawk Lancaster</h4>
+          <p>Designed for precision agriculture, this drone collects aerial data on soil moisture, crop height, and canopy cover, ideal for mid-sized farms.</p>
+          <a href="https://precisionhawk.com " target="_blank" class="inline-block mt-3 text-green-600 hover:text-green-800 font-medium">Visit Website →</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-green-800 text-white py-12 mt-16">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <h3 class="text-xl font-bold mb-4">Agri-Technology Resource Center</h3>
+          <p class="text-green-200">Connecting farmers and researchers with the future of agriculture through innovative technology and knowledge sharing.</p>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+          <ul class="space-y-2">
+            <li><a href="../index.html" class="text-green-200 hover:text-white transition-colors block">Home</a></li>
+            <li><a href="../index.html#resources" class="text-green-200 hover:text-white transition-colors block">Resources</a></li>
+            <li><a href="../index.html#news" class="text-green-200 hover:text-white transition-colors block">News</a></li>
+            <li><a href="../index.html#about" class="text-green-200 hover:text-white transition-colors block">About Us</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-4">Contact Information</h3>
+          <address class="not-italic text-green-200">
+            <p>Email: agritechnologyresourcecenter@gmail.com</p>
+            <p>Phone: +256 (706) 691-486</p>
+          </address>
+        </div>
+      </div>
+      <div class="border-t border-green-700 mt-8 pt-6 text-center text-green-300">
+        <p>&copy; 2025 Agri-Technology Resource Center. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript Logic -->
+  <script>
+    const drones = [
+      {
+        name: "DJI Agras T30",
+        description: "Autonomous crop spraying drone with AI-based terrain mapping and obstacle avoidance.",
+        category: "Spraying Drones",
+        details: `
+          <p>The DJI Agras T30 is one of the most advanced agricultural spraying drones available today. It’s designed for large-scale operations and offers intelligent flight planning, wind-adjusted spraying, and real-time field scanning.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Carries up to 30L of liquid per flight</li>
+            <li>Sprays at rates up to 1.2L/min</li>
+            <li>Obstacle sensing with LiDAR</li>
+            <li>AI-powered terrain mapping</li>
+            <li>Compatible with farm management software</li>
+          </ul>
+          <p><strong>Best For:</strong> Large-scale orchards, rice paddies, and row crops.</p>
+          <p><strong>Cost:</strong> Starting at $15,000–$20,000 depending on configuration.</p>
+          <div class="mt-4">
+            <a href="https://www.dji.com/agras-t30 " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Learn More →</a>
+          </div>
+        `
+      },
+      {
+        name: "senseFly eBee X",
+        description: "Fixed-wing drone for high-efficiency crop and soil mapping.",
+        category: "NDVI Mapping",
+        details: `
+          <p>The senseFly eBee X is a long-range fixed-wing drone capable of covering up to 500 hectares in a single flight. It's often used for creating orthomosaics and vegetation maps.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Up to 90 minutes of flight time</li>
+            <li>Supports RGB, multispectral, and thermal cameras</li>
+            <li>Automated flight planning and return-to-home</li>
+            <li>High accuracy mapping and GIS integration</li>
+            <li>Lightweight and portable design</li>
+          </ul>
+          <p><strong>Best For:</strong> Large-scale crop mapping, soil analysis, and field zoning.</p>
+          <p><strong>Cost:</strong> Around $10,000–$20,000 depending on payload.</p>
+          <div class="mt-4">
+            <a href="https://www.sensefly.com/the-ebex/ " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Learn More →</a>
+          </div>
+        `
+      },
+      {
+        name: "Parrot Bluegrass Fields",
+        description: "Compact drone for vegetation index generation and field health monitoring.",
+        category: "NDVI Mapping",
+        details: `
+          <p>Parrot Bluegrass Fields is a lightweight quadcopter designed specifically for crop and soil health assessment. It comes with a Sequoia+ multispectral sensor for NDVI and EVI analysis.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Easy-to-use app for autonomous missions</li>
+            <li>Multispectral imaging for plant stress detection</li>
+            <li>GPS tagging and cloud upload</li>
+            <li>Great for small to medium farms</li>
+            <li>Portable and easy to fly</li>
+          </ul>
+          <p><strong>Best For:</strong> Mid-sized farms needing regular crop health reports.</p>
+          <p><strong>Cost:</strong> Around $4,500–$6,000</p>
+          <div class="mt-4">
+            <a href="https://www.parrot.com/agriculture " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Learn More →</a>
+          </div>
+        `
+      },
+      {
+        name: "PrecisionHawk Lancaster 9",
+        description: "Versatile drone for crop monitoring, soil analysis, and field scouting.",
+        category: "Crop Monitoring",
+        details: `
+          <p>The PrecisionHawk Lancaster 9 is a fixed-wing drone equipped with multispectral, thermal, and RGB cameras for comprehensive field data collection.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Modular sensor options</li>
+            <li>Automatic takeoff and landing</li>
+            <li>Cloud-based data processing</li>
+            <li>Vegetation index generation</li>
+            <li>Flight time: Up to 45 minutes</li>
+          </ul>
+          <p><strong>Best For:</strong> Detailed crop scouting and historical trend analysis.</p>
+          <p><strong>Cost:</strong> ~$5,000–$10,000</p>
+          <div class="mt-4">
+            <a href="https://precisionhawk.com " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Learn More →</a>
+          </div>
+        `
+      },
+      {
+        name: "DJI Mavic 3 Cine (Custom Agricultural Payload)",
+        description: "High-resolution RGB and thermal imaging drone for crop scouting and irrigation planning.",
+        category: "Crop Monitoring",
+        details: `
+          <p>While not specifically built for agriculture, the DJI Mavic 3 Cine can be customized with multispectral sensors for precision scouting, irrigation leak detection, and field boundary mapping.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>45-minute flight time</li>
+            <li>Thermal and visual spectrum imaging</li>
+            <li>4K video and HD live feed</li>
+            <li>Portability and quick deployment</li>
+            <li>Integration with GIS tools</li>
+          </ul>
+          <p><strong>Best For:</strong> Irrigation monitoring, livestock tracking, and field boundary surveys.</p>
+          <p><strong>Cost:</strong> ~$4,000–$5,000</p>
+          <div class="mt-4">
+            <a href="https://www.dji.com/mavic-3-series " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Learn More →</a>
+          </div>
+        `
+      },
+      {
+        name: "Yamaha RMAX G2",
+        description: "Gas-powered UAV used for aerial spraying in rice paddies and hard-to-reach areas.",
+        category: "Spraying Drones",
+        details: `
+          <p>Although older, Yamaha's RMAX G2 remains popular in Japan and other Asian countries due to its reliability and heavy payload capacity for liquid spraying.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Gas engine for longer operation</li>
+            <li>Can carry up to 20kg of liquid</li>
+            <li>Manual and semi-autonomous flight modes</li>
+            <li>Ideal for flooded rice fields</li>
+            <li>Robust build for rough conditions</li>
+          </ul>
+          <p><strong>Best For:</strong> Rice farming, orchard spraying, and remote areas without electricity.</p>
+          <p><strong>Cost:</strong> ~$15,000–$20,000</p>
+          <div class="mt-4">
+            <a href="https://www.yamaha-motor.com/agricultural-uav/rmax-g2.aspx " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Learn More →</a>
+          </div>
+        `
+      },
+      {
+        name: "AgEagle N100",
+        description: "Multispectral drone for crop health and nitrogen monitoring.",
+        category: "NDVI Mapping",
+        details: `
+          <p>The AgEagle N100 is a compact drone optimized for crop health monitoring using multispectral imaging. It integrates with platforms like SlantRange and AgLeader.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>SlantRange 3P sensor for plant health</li>
+            <li>Flight time: 55+ minutes</li>
+            <li>Pre-programmed flight paths</li>
+            <li>Compatibility with agronomy apps</li>
+            <li>FieldEdge by AGCO integration</li>
+          </ul>
+          <p><strong>Best For:</strong> Corn, soybean, cotton, and wheat producers needing actionable insights.</p>
+          <p><strong>Cost:</strong> ~$3,500–$5,000</p>
+          <div class="mt-4">
+            <a href="https://www.ageagle.com/n100 " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Learn More →</a>
+          </div>
+        `
+      },
+      {
+        name: "Sentera PHX",
+        description: "Drone with dual-sensor capabilities for precise crop stress detection.",
+        category: "NDVI Mapping",
+        details: `
+          <p>The Sentera PHX is a high-performance drone equipped with both RGB and multispectral sensors, enabling real-time plant health assessments.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Dual sensor setup (RGB + Multispectral)</li>
+            <li>Sequoia+ compatibility</li>
+            <li>Flight time: 40+ minutes</li>
+            <li>Integrated flight planning and data analysis</li>
+            <li>Data sync with FieldView and John Deere Operations Center</li>
+          </ul>
+          <p><strong>Best For:</strong> Corn, soybean, and cotton growers looking for precision insights.</p>
+          <p><strong>Cost:</strong> ~$4,000–$6,000</p>
+          <div class="mt-4">
+            <a href="https://www.sentera.com/phx-drone " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Learn More →</a>
+          </div>
+        `
+      },
+      {
+        name: "DJI Phantom 4 RTK (Modified for Farming)",
+        description: "Photogrammetry-focused drone used for mapping and field scouting.",
+        category: "Crop Monitoring",
+        details: `
+          <p>Though originally a commercial drone, the DJI Phantom 4 RTK has been widely adopted for precision agriculture thanks to its centimeter-level positioning and high-resolution imaging.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>RTK GPS for accurate geotagging</li>
+            <li>1-inch CMOS sensor for sharp images</li>
+            <li>Used for mapping, scouting, and elevation modeling</li>
+            <li>Post-processing with Pix4D or DroneDeploy</li>
+            <li>Excellent for research and small plots</li>
+          </ul>
+          <p><strong>Best For:</strong> Research institutions, university farms, and smallholder crop monitoring.</p>
+          <p><strong>Cost:</strong> ~$1,500–$3,000</p>
+          <div class="mt-4">
+            <a href="https://www.dji.com/phantom-4-rtk " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Learn More →</a>
+          </div>
+        `
+      },
+      {
+        name: "Fendt Xaver 6000",
+        description: "Autonomous drone system for seed monitoring and field analytics.",
+        category: "Yield Prediction",
+        details: `
+          <p>Fendt's Xaver 6000 is part of their digital farming ecosystem. It uses multiple drones and AI to monitor seed germination, plant growth, and potential yield estimates.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Autonomous launch and recovery</li>
+            <li>AI-based growth stage analysis</li>
+            <li>Seed emergence monitoring</li>
+            <li>Cloud-connected dashboard</li>
+            <li>Works with Fendt tractor systems</li>
+          </ul>
+          <p><strong>Best For:</strong> Seed companies and large agribusinesses focused on early-stage crop performance.</p>
+          <p><strong>Cost:</strong> Custom pricing based on enterprise use</p>
+          <div class="mt-4">
+            <a href="https://www.fendt.com/int-en/farm-management/xaver-6000.html " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Learn More →</a>
+          </div>
+        `
+      },
+      {
+        name: "Agras T16 Spray Drone",
+        description: "Heavy-duty drone for automated pesticide and fertilizer application.",
+        category: "Spraying Drones",
+        details: `
+          <p>The DJI Agras T16 is a powerful spraying drone with a 16L tank and intelligent route planning for efficient coverage of large fields.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Flow-controlled spray system</li>
+            <li>Smart route planning</li>
+            <li>LiDAR for terrain-following</li>
+            <li>Wind and rain resistance</li>
+            <li>Compatible with ground control stations</li>
+          </ul>
+          <p><strong>Best For:</strong> Cotton, sugarcane, corn, and rice fields in Asia, Africa, and Latin America.</p>
+          <p><strong>Cost:</strong> ~$15,000–$18,000</p>
+          <div class="mt-4">
+            <a href="https://www.dji.com/agras-t16 " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Learn More →</a>
+          </div>
+        `
+      },
+      {
+        name: "Slantrange 3P",
+        description: "Advanced drone for plant population counting and stress detection.",
+        category: "Yield Prediction",
+        details: `
+          <p>Slantrange 3P is a drone with multispectral imaging for plant population estimation, chlorophyll levels, and early disease detection.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Plant stand and spacing analysis</li>
+            <li>Nitrogen deficiency detection</li>
+            <li>Plant stress identification</li>
+            <li>No GCPs required</li>
+            <li>AI-powered crop analytics</li>
+          </ul>
+          <p><strong>Best For:</strong> Early-season crop scouting and replant decisions.</p>
+          <p><strong>Cost:</strong> ~$4,000–$6,000</p>
+          <div class="mt-4">
+            <a href="https://slantrange.com " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Learn More →</a>
+          </div>
+        `
+      },
+      {
+        name: "DJI P4 Multispectral",
+        description:="DJI P4 Multispectral combines RGB and multispectral imaging for vegetation analysis.",
+        category: "NDVI Mapping",
+        details: `
+          <p>The DJI Phantom 4 Multispectral is a dedicated agricultural drone with six integrated sensors for vegetation analysis and field health mapping.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>1 RGB + 5 multispectral bands</li>
+            <li>RTK for accurate geolocation</li>
+            <li>Generates NDVI, GNDVI, NDRE maps</li>
+            <li>Suitable for crop health and soil analysis</li>
+            <li>Integrates with DJI GS RTK App</li>
+          </ul>
+          <p><strong>Best For:</strong> Soybean, wheat, and corn farms needing frequent health monitoring.</p>
+          <p><strong>Cost:</strong> ~$5,000-$7,000</p>
+          <div class="mt-4">
+            <a href="https://www.dji.com/dji-phantom-4-multispectral " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Learn More →</a>
+          </div>
+        `
+      },
+      {
+        name: "HoneyComb Drone",
+        description: "Open-source drone platform for custom agricultural payloads.",
+        category: "Soil Analysis",
+        details: `
+          <p>HoneyComb is an open-source drone framework that allows users to customize drones with sensors for soil moisture, crop health, and temperature monitoring.</p>
+          <p><strong>Key Features:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Modular design</li>
+            <li>DIY or pre-built options</li>
+            <li>Supports thermal, LiDAR, and multispectral sensors</li>
+            <li>Community-supported development</li>
+            <li>Low-cost alternative for startups</li>
+          </ul>
+          <p><strong>Best For:</strong> Researchers, NGOs, and small tech startups developing custom drone solutions.</p>
+          <p><strong>Cost:</strong> Varies based on components (~$2,000–$6,000)</p>
+          <div class="mt-4">
+            <a href="https://honeycomb.io " target="_blank" class="inline-block text-green-600 hover:text-green-800 font-medium">Learn More →</a>
+          </div>
+        `
+      }
+    ];
+
+    function renderDrones(filter = '', search = '') {
+      const container = document.getElementById('droneGrid');
+      container.innerHTML = '';
+      let filtered = drones;
+
+      if (filter) {
+        filtered = filtered.filter(d => d.category === filter);
+      }
+
+      if (search) {
+        const lowerSearch = search.toLowerCase();
+        filtered = filtered.filter(d =>
+          d.name.toLowerCase().includes(lowerSearch) || d.description.toLowerCase().includes(lowerSearch)
+        );
+      }
+
+      filtered.forEach((drone, index) => {
+        const div = document.createElement('div');
+        div.className = 'bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow border border-gray-200';
+        div.innerHTML = `
+          <img src="https://placehold.co/600x300/2f855a/ffffff?text= ${encodeURIComponent(drone.category)}" alt="${drone.name}" class="w-full h-40 object-cover" />
+          <div class="p-6">
+            <span class="text-xs font-semibold text-green-600 uppercase">${drone.category}</span>
+            <h4 class="text-lg font-bold mt-2">${drone.name}</h4>
+            <p class="mt-3 text-gray-700 text-sm">${drone.description}</p>
+            <button onclick="toggleDetails(event, this)" class="mt-4 inline-flex items-center text-green-600 hover:text-green-800 font-medium">
+              Read More
+              <svg class="ml-1 w-4 h-4 transition-transform duration-300 rotate-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="transition-max-h mt-4 text-sm text-gray-700">
+              ${drone.details}
+            </div>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function toggleDetails(e, btn) {
+      e.preventDefault();
+      const icon = btn.querySelector('.rotate-icon');
+      const details = btn.nextElementSibling;
+      details.classList.toggle('expanded');
+      icon.classList.toggle('open');
+    }
+
+    function applyCategory(category) {
+      document.getElementById('categoryFilter').value = category;
+      filterDrones();
+    }
+
+    function filterDrones() {
+      const search = document.getElementById('searchInput').value.trim();
+      const category = document.getElementById('categoryFilter').value;
+      renderDrones(category, search);
+    }
+
+    // Search suggestions
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.trim().toLowerCase();
+      if (!query) {
+        searchResults.classList.add('hidden');
+        return;
+      }
+
+      const matches = drones.filter(d =>
+        d.name.toLowerCase().includes(query) || d.description.toLowerCase().includes(query)
+      );
+
+      searchResults.innerHTML = '';
+      if (matches.length > 0) {
+        searchResults.classList.remove('hidden');
+        matches.forEach(drone => {
+          const div = document.createElement('div');
+          div.className = 'p-3 hover:bg-green-100 border-b last:border-b-0 cursor-pointer';
+          div.textContent = `${drone.name} - ${drone.description.substring(0, 50)}...`;
+          div.onclick = () => {
+            searchInput.value = drone.name;
+            searchResults.classList.add('hidden');
+            renderDrones('', drone.name);
+          };
+          searchResults.appendChild(div);
+        });
+      } else {
+        searchResults.classList.add('hidden');
+      }
+    });
+
+    window.addEventListener('click', (e) => {
+      if (!searchResults.contains(e.target) && e.target !== searchInput) {
+        searchResults.classList.add('hidden');
+      }
+    });
+
+    // Initial render
+    renderDrones();
+  </script>
+</body>
+</html>

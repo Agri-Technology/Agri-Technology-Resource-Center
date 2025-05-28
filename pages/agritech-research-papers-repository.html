@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AgriTech Research Papers Repository</title>
+  <script src="https://cdn.tailwindcss.com "></script>
+  <style>
+    .hidden { display: none; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- Header -->
+  <header class="bg-green-700 text-white shadow-lg sticky top-0 z-10">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold">Agri-Technology Resource Center</h1>
+      <a href="../index.html" class="hover:underline">Home</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-green-600 to-teal-500 text-white py-16">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">AgriTech Research Papers Repository</h2>
+      <p class="text-lg md:text-xl max-w-3xl mx-auto">
+        Access peer-reviewed studies, technical reports, and whitepapers on the latest innovations in agricultural technology.
+      </p>
+    </div>
+  </section>
+
+  <!-- Search & Filter Bar -->
+  <section class="py-6 bg-white shadow-sm">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
+        <input 
+          type="text" 
+          placeholder="Search by title, author, or keyword..." 
+          id="searchInput"
+          class="w-full md:w-1/2 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400"
+        />
+        <select id="categoryFilter" class="w-full md:w-auto p-3 border border-gray-300 rounded-md bg-white text-gray-700">
+          <option value="">All Categories</option>
+          <option value="Precision Agriculture">Precision Agriculture</option>
+          <option value="AI in Farming">AI in Farming</option>
+          <option value="IoT Devices">IoT Devices</option>
+          <option value="Drones & Remote Sensing">Drones & Remote Sensing</option>
+          <option value="Climate Resilience">Climate Resilience</option>
+          <option value="Sustainable Practices">Sustainable Practices</option>
+          <option value="Blockchain in Supply Chain">Blockchain in Supply Chain</option>
+          <option value="Regenerative Agriculture">Regenerative Agriculture</option>
+          <option value="Vertical Farming">Vertical Farming</option>
+        </select>
+        <button onclick="filterPapers()" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-md transition-colors">
+          Search
+        </button>
+      </div>
+
+      <!-- Search Suggestions -->
+      <div id="searchResults" class="mt-2 bg-white border border-gray-300 rounded-md shadow-md hidden max-h-64 overflow-y-auto z-20 w-full md:w-1/2">
+        <!-- Results will be injected here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container mx-auto px-6 py-12 space-y-16">
+
+    <!-- Featured Papers -->
+    <section>
+      <h3 class="text-2xl font-semibold text-green-700 mb-6">Featured Research Papers</h3>
+      <div id="paperGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Paper Cards will be inserted here dynamically by JS -->
+      </div>
+    </section>
+
+    <!-- Browse by Category -->
+    <section>
+      <h3 class="text-2xl font-semibold text-green-700 mb-6">Browse by Category</h3>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div onclick="applyCategory('Precision Agriculture')" class="bg-green-100 text-green-800 p-4 rounded-lg text-center cursor-pointer hover:bg-green-200 transition-colors">
+          Precision Agriculture
+        </div>
+        <div onclick="applyCategory('AI in Farming')" class="bg-green-100 text-green-800 p-4 rounded-lg text-center cursor-pointer hover:bg-green-200 transition-colors">
+          AI in Farming
+        </div>
+        <div onclick="applyCategory('IoT Devices')" class="bg-green-100 text-green-800 p-4 rounded-lg text-center cursor-pointer hover:bg-green-200 transition-colors">
+          IoT Devices
+        </div>
+        <div onclick="applyCategory('Drones & Remote Sensing')" class="bg-green-100 text-green-800 p-4 rounded-lg text-center cursor-pointer hover:bg-green-200 transition-colors">
+          Drones & Remote Sensing
+        </div>
+        <div onclick="applyCategory('Climate Resilience')" class="bg-green-100 text-green-800 p-4 rounded-lg text-center cursor-pointer hover:bg-green-200 transition-colors">
+          Climate Resilience
+        </div>
+        <div onclick="applyCategory('Sustainable Practices')" class="bg-green-100 text-green-800 p-4 rounded-lg text-center cursor-pointer hover:bg-green-200 transition-colors">
+          Sustainable Practices
+        </div>
+        <div onclick="applyCategory('Blockchain in Supply Chain')" class="bg-green-100 text-green-800 p-4 rounded-lg text-center cursor-pointer hover:bg-green-200 transition-colors">
+          Blockchain in Supply Chain
+        </div>
+        <div onclick="applyCategory('Regenerative Agriculture')" class="bg-green-100 text-green-800 p-4 rounded-lg text-center cursor-pointer hover:bg-green-200 transition-colors">
+          Regenerative Agriculture
+        </div>
+        <div onclick="applyCategory('Vertical Farming')" class="bg-green-100 text-green-800 p-4 rounded-lg text-center cursor-pointer hover:bg-green-200 transition-colors">
+          Vertical Farming
+        </div>
+      </div>
+    </section>
+
+    <!-- Top Contributing Institutions -->
+    <section>
+      <h3 class="text-2xl font-semibold text-green-700 mb-6">Top Contributing Institutions</h3>
+      <ul class="space-y-3 list-disc pl-5">
+        <li><strong>University of California, Davis:</strong> Leading research in sustainable farming technologies.</li>
+        <li><strong>MIT Media Lab:</strong> Pioneering AI and robotics in agriculture.</li>
+        <li><strong>Stanford University:</strong> Innovations in remote sensing and data analytics.</li>
+        <li><strong>International Rice Research Institute (IRRI):</strong> Focused on climate-resilient crops.</li>
+        <li><strong>ETH Zurich:</strong> Advanced sensor networks and autonomous farming solutions.</li>
+        <li><strong>Cornell University:</strong> Smart irrigation systems and agronomy modeling.</li>
+        <li><strong>Wageningen University:</strong> Expertise in vertical farming and controlled-environment agriculture.</li>
+        <li><strong>CSIRO Australia:</strong> Soil science, regenerative practices, and carbon sequestration research.</li>
+        <li><strong>Tsinghua University:</strong> Blockchain applications in food traceability and supply chain transparency.</li>
+        <li><strong>FAO - Food and Agriculture Organization:</strong> Global food security and policy insights.</li>
+      </ul>
+    </section>
+
+    <!-- About the Repository -->
+    <section>
+      <h3 class="text-2xl font-semibold text-green-700 mb-6">About the Repository</h3>
+      <p class="mb-4">
+        The AgriTech Research Papers Repository is a curated collection of academic and industry publications focused on technological advancements in agriculture. It serves as a central hub for researchers, students, farmers, and policymakers to access high-quality, peer-reviewed content that supports innovation and sustainable practices.
+      </p>
+      <p>
+        Our goal is to democratize access to agricultural research and foster collaboration between academia, startups, and farming communities around the world. Whether you're looking for cutting-edge drone-based crop monitoring tools, AI-powered pest detection systems, or blockchain-enabled food traceability solutions, this repository offers a wealth of knowledge to support your work.
+      </p>
+      <p class="mt-4">
+        All papers are either open-access or used under fair use guidelines for educational purposes only. For commercial reuse or citation, please refer to original sources and publishers.
+      </p>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-green-800 text-white py-12 mt-16">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <h3 class="text-xl font-bold mb-4">Agri-Technology Resource Center</h3>
+          <p class="text-green-200">Connecting farmers and researchers with the future of agriculture through innovative technology and knowledge sharing.</p>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+          <ul class="space-y-2">
+            <li><a href="../index.html" class="text-green-200 hover:text-white transition-colors block">Home</a></li>
+            <li><a href="../index.html#resources" class="text-green-200 hover:text-white transition-colors block">Resources</a></li>
+            <li><a href="../index.html#news" class="text-green-200 hover:text-white transition-colors block">News</a></li>
+            <li><a href="../index.html#about" class="text-green-200 hover:text-white transition-colors block">About Us</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-4">Contact Information</h3>
+          <address class="not-italic text-green-200">
+            <p>Email: agritechnologyresourcecenter@gmail.com</p>
+            <p>Phone: +256 (706) 691-486</p>
+          </address>
+        </div>
+      </div>
+      <div class="border-t border-green-700 mt-8 pt-6 text-center text-green-300">
+        <p>&copy; 2025 Agri-Technology Resource Center. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript Logic -->
+  <script>
+    const papers = [
+      {
+        title: "Optimizing Irrigation with IoT Sensors",
+        abstract: "This study explores how integrating real-time soil moisture data with smart irrigation systems can reduce water usage by up to 40% without compromising crop yield.",
+        authors: "Dr. Jane Doe, Prof. Alan Smith",
+        institution: "AgriTech Institute",
+        year: "2024",
+        category: "IoT Devices",
+        body: `
+          <p>This research aimed to evaluate the efficiency gains of deploying IoT-enabled soil sensors connected to automated drip irrigation systems across 10 farms over a 12-month growing season. The system was designed to collect local weather forecasts, soil moisture levels, and plant health indicators to optimize watering schedules based on demand rather than fixed time cycles.</p>
+          <p>The results showed that farmers were able to reduce their water usage by 39.7% while maintaining equivalent or improved yields compared to traditional methods. Additionally, energy consumption associated with pumping water was reduced by 28%, contributing to both cost savings and environmental sustainability.</p>
+          <p>Key components included Raspberry Pi-based controllers, capacitive soil moisture sensors, cloud data storage via AWS, and mobile alerts for anomalies such as leaks or power outages.</p>
+          <p><strong>Conclusion:</strong> Smart irrigation systems powered by IoT offer a scalable solution for sustainable water use in agriculture, particularly in drought-prone regions.</p>
+        `
+      },
+      {
+        title: "Machine Learning Models for Pest Detection",
+        abstract: "This paper presents deep learning models trained on drone-captured images to detect early signs of pest infestations with over 95% accuracy.",
+        authors: "Ravi Kumar, Maria Lopez",
+        institution: "MIT Media Lab",
+        year: "2023",
+        category: "AI in Farming",
+        body: `
+          <p>In order to address early detection of pest infestations, we developed YOLOv5 and Mask R-CNN-based models trained on a dataset of over 200,000 aerial and close-range images collected from vineyards and rice paddies across three continents.</p>
+          <p>The model achieved an average precision score of 96.2% on test datasets and was successfully deployed on edge devices mounted on drones for real-time inference during flight missions.</p>
+          <p>Post-processing pipelines were developed to generate heatmaps of affected areas and recommend targeted pesticide applications, reducing chemical usage by up to 50% in pilot tests.</p>
+          <p><strong>Conclusion:</strong> Computer vision-powered pest detection is a viable approach for precision pest control, minimizing both environmental impact and operational costs.</p>
+        `
+      },
+      {
+        title: "High-Resolution Crop Monitoring Using UAVs",
+        abstract: "This paper evaluates the effectiveness of UAV-based multispectral imaging in monitoring large-scale crop health across different climate zones.",
+        authors: "Emily Chen, Ahmed Farouk",
+        institution: "Stanford Earth",
+        year: "2024",
+        category: "Drones & Remote Sensing",
+        body: `
+          <p>Using multispectral cameras mounted on small UAVs, this project evaluated the ability of remote sensing techniques to assess plant stress levels across wheat fields in arid, temperate, and tropical environments.</p>
+          <p>The team processed thousands of NDVI and EVI images using Google Earth Engine and compared them against ground-truth measurements taken manually at sampling points.</p>
+          <p>Results showed strong correlation between vegetation indices derived from UAV imagery and actual biomass/yield data, validating the method’s utility in precision agriculture planning.</p>
+          <p><strong>Conclusion:</strong> UAV-based crop monitoring offers high-resolution insights into field variability and supports proactive decision-making in diverse agroecological settings.</p>
+        `
+      },
+      {
+        title: "Soil Carbon Sequestration Through Regenerative Practices",
+        abstract: "Presents long-term data on carbon capture potential in regenerative agriculture.",
+        authors: "Julia Green, Thomas Bell",
+        institution: "CSIRO Australia",
+        year: "2024",
+        category: "Regenerative Agriculture",
+        body: `
+          <p>This multi-year study assessed the impact of regenerative farming practices—such as cover cropping, no-till, and rotational grazing—on soil carbon sequestration rates across multiple biomes.</p>
+          <p>Findings indicate that adopting these practices led to an average increase in soil organic carbon of 0.6% per year, significantly higher than conventional farming approaches.</p>
+          <p>Additionally, improvements in water retention and microbial activity were observed, supporting claims of increased resilience to climate change effects like drought and extreme rainfall events.</p>
+          <p><strong>Conclusion:</strong> Regenerative agriculture is a powerful tool for reversing soil degradation and enhancing carbon drawdown.</p>
+        `
+      },
+      {
+        title: "Blockchain Applications in Food Supply Chains",
+        abstract: "Explores how blockchain can improve traceability and trust in food supply chains.",
+        authors: "Li Wei, Sarah Kim",
+        institution: "Tsinghua University",
+        year: "2025",
+        category: "Blockchain in Supply Chain",
+        body: `
+          <p>As food supply chains become increasingly complex and globalized, ensuring transparency and authenticity has become a major challenge. This paper explores the implementation of blockchain technology to track food products from farm to table.</p>
+          <p>A case study involving mango exports from Southeast Asia to European markets demonstrated that blockchain-based systems could reduce fraud, ensure compliance with organic certifications, and improve recall processes in case of contamination incidents.</p>
+          <p>Smart contracts were also tested for automating payments upon fulfillment of delivery conditions, improving cash flow for smallholder farmers.</p>
+          <p><strong>Conclusion:</strong> Blockchain provides a promising framework for building secure, transparent, and efficient food supply networks.</p>
+        `
+      },
+      {
+        title: "Vertical Farming with AI-Controlled Lighting Systems",
+        abstract: "Analyzes the efficiency gains from adaptive LED lighting in indoor farms.",
+        authors: "Amit Patel, Lena Meier",
+        institution: "Wageningen University",
+        year: "2025",
+        category: "Vertical Farming",
+        body: `
+          <p>This research focused on optimizing light spectra and intensity for hydroponic lettuce production in vertical farms using machine learning algorithms.</p>
+          <p>The system used feedback loops from growth sensors to adjust red, blue, and far-red LEDs dynamically throughout the growth cycle, achieving faster maturation and higher nutritional content.</p>
+          <p>Compared to static lighting setups, the adaptive system increased biomass by 18% and reduced electricity consumption by 22% over a 6-week trial period.</p>
+          <p><strong>Conclusion:</strong> AI-driven lighting optimization enhances both productivity and sustainability in controlled-environment agriculture.</p>
+        `
+      },
+      {
+        title: "Impact of Climate Change on Global Crop Yields",
+        abstract: "Analyzes historical and projected impacts of rising temperatures and shifting precipitation patterns on staple crops.",
+        authors: "Carlos Mendes, Fatima Al-Khatib",
+        institution: "FAO",
+        year: "2024",
+        category: "Climate Resilience",
+        body: `
+          <p>This meta-analysis reviewed over 100 climate-agriculture studies conducted between 2010 and 2024 to understand how temperature increases and irregular rainfall are affecting wheat, rice, and maize yields globally.</p>
+          <p>Key findings show that for every 1°C rise in average temperature, yields decline by 6–10% depending on region and crop type. Drought-prone areas have seen sharper declines, especially in sub-Saharan Africa and South Asia.</p>
+          <p>Adaptation strategies such as drought-resistant cultivars and conservation agriculture were found to mitigate losses but require policy support and farmer education to scale effectively.</p>
+          <p><strong>Conclusion:</strong> Climate-resilient technologies must be integrated into national agricultural policies to safeguard global food security.</p>
+        `
+      },
+      {
+        title: "Reducing Post-Harvest Loss with Smart Storage Solutions",
+        abstract: "Investigates IoT-enabled grain silos that monitor temperature and humidity to prevent spoilage.",
+        authors: "Anita Desai, Kwame Osei",
+        institution: "International Maize and Wheat Improvement Center",
+        year: "2024",
+        category: "Sustainable Practices",
+        body: `
+          <p>In many developing countries, post-harvest losses account for up to 30% of total crop production due to poor storage infrastructure. This paper examines the performance of IoT-connected silos equipped with sensors and ventilation controls.</p>
+          <p>Pilot programs in Kenya and India showed a reduction in mold and insect damage by over 70%, increasing usable grain volumes and market prices for small farmers.</p>
+          <p>Data from the silos was transmitted to a mobile app allowing users to receive alerts and maintenance recommendations remotely.</p>
+          <p><strong>Conclusion:</strong> Smart storage solutions can significantly reduce food loss and empower smallholder farmers economically.</p>
+        `
+      },
+      {
+        title: "Digital Twin Technology in Precision Agriculture",
+        abstract: "Explores how digital twins simulate entire farms for predictive analytics and better decision-making.",
+        authors: "Luis Ortega, Hana Yamamoto",
+        institution: "ETH Zurich",
+        year: "2025",
+        category: "AI in Farming",
+        body: `
+          <p>Digital twin technology allows for virtual replication of physical farms, enabling real-time simulations of various management scenarios such as irrigation changes, planting dates, and pest outbreaks.</p>
+          <p>By integrating satellite, drone, and sensor data, the system can predict outcomes with high accuracy, helping farmers choose optimal strategies before implementing them in the field.</p>
+          <p>In field trials, digital twin systems reduced input costs by 15% and increased overall yield by 12% compared to control plots managed without simulation tools.</p>
+          <p><strong>Conclusion:</strong> Digital twin platforms represent the next evolution of precision agriculture, offering predictive capabilities and risk mitigation.</p>
+        `
+      },
+      {
+        title: "The Role of Biochar in Soil Health and Carbon Capture",
+        abstract: "Examines the agronomic and environmental benefits of biochar application in degraded soils.",
+        authors: "Dr. Elena Ruiz, Dr. Peter Lin",
+        institution: "University of Nairobi",
+        year: "2024",
+        category: "Regenerative Agriculture",
+        body: `
+          <p>Biochar, a charcoal-like substance made from agricultural waste, has shown promise in restoring degraded soils and sequestering carbon dioxide.</p>
+          <p>This paper reviews field experiments where biochar was applied to nutrient-depleted soils in East Africa, resulting in increased cation exchange capacity, improved moisture retention, and boosted crop productivity.</p>
+          <p>On average, treated fields showed a 25% increase in maize yield after one growing season, while long-term carbon storage estimates suggest biochar remains stable in soil for hundreds of years.</p>
+          <p><strong>Conclusion:</strong> Biochar is a dual-purpose solution for enhancing food security and combating climate change through carbon sequestration.</p>
+        `
+      }
+    ];
+
+    function renderPapers(filter = '', search = '') {
+      const container = document.getElementById('paperGrid');
+      container.innerHTML = '';
+      let filtered = papers;
+
+      if (filter) {
+        filtered = filtered.filter(p => p.category === filter);
+      }
+
+      if (search) {
+        const lowerSearch = search.toLowerCase();
+        filtered = filtered.filter(p => 
+          p.title.toLowerCase().includes(lowerSearch) || 
+          p.authors.toLowerCase().includes(lowerSearch)
+        );
+      }
+
+      filtered.forEach((paper, index) => {
+        const div = document.createElement('div');
+        div.className = 'bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow border border-gray-200';
+        div.innerHTML = `
+          <img src="https://placehold.co/600x300/2f855a/ffffff?text= ${encodeURIComponent(paper.category)}" alt="Paper Cover" class="w-full h-40 object-cover" />
+          <div class="p-6">
+            <span class="text-xs font-semibold text-green-600 uppercase">${paper.category}</span>
+            <h4 class="text-lg font-bold mt-2">${paper.title}</h4>
+            <p class="text-sm text-gray-600 mt-2">Authors: ${paper.authors} | Institution: ${paper.institution} | Year: ${paper.year}</p>
+            <p class="mt-3 text-gray-700 text-sm">${paper.abstract}</p>
+            <button onclick="toggleDetails(this)" class="inline-block mt-4 text-green-600 hover:text-green-800 font-medium">Read More →</button>
+            <div class="mt-4 hidden text-sm text-gray-700">${paper.body}</div>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function toggleDetails(btn) {
+      const details = btn.nextElementSibling;
+      details.classList.toggle('hidden');
+      btn.textContent = details.classList.contains('hidden') ? 'Read More →' : 'Show Less ↑';
+    }
+
+    function applyCategory(category) {
+      document.getElementById('categoryFilter').value = category;
+      filterPapers();
+    }
+
+    function filterPapers() {
+      const search = document.getElementById('searchInput').value.trim();
+      const category = document.getElementById('categoryFilter').value;
+      renderPapers(category, search);
+    }
+
+    // Search suggestion logic
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.trim().toLowerCase();
+      if (!query) {
+        searchResults.classList.add('hidden');
+        return;
+      }
+
+      const matches = papers.filter(p =>
+        p.title.toLowerCase().includes(query) || p.authors.toLowerCase().includes(query)
+      );
+
+      searchResults.innerHTML = '';
+      if (matches.length > 0) {
+        searchResults.classList.remove('hidden');
+        matches.forEach(paper => {
+          const div = document.createElement('div');
+          div.className = 'p-3 hover:bg-green-100 border-b last:border-b-0 cursor-pointer';
+          div.textContent = `${paper.title} - ${paper.authors}`;
+          div.onclick = () => {
+            searchInput.value = `${paper.title}`;
+            searchResults.classList.add('hidden');
+            renderPapers('', paper.title);
+          };
+          searchResults.appendChild(div);
+        });
+      } else {
+        searchResults.classList.add('hidden');
+      }
+    });
+
+    window.addEventListener('click', (e) => {
+      if (!searchResults.contains(e.target) && e.target !== searchInput) {
+        searchResults.classList.add('hidden');
+      }
+    });
+
+    // Initial render
+    renderPapers();
+  </script>
+</body>
+</html>
